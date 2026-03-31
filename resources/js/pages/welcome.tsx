@@ -1,6 +1,8 @@
 import Clients from '@/section/Clients';
 import Hero from '@/section/Hero';
+import Products from '@/section/Products';
 import Services from '@/section/Services';
+import Workflow from '@/section/Workflow';
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
 import { Head } from '@inertiajs/react';
@@ -19,6 +21,8 @@ export default function Welcome() {
             <Hero />
             <Clients />
             <Services />
+            <Workflow />
+            <Products />
             <Whatsapp />
         </>
     );
