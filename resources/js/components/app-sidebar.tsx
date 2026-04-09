@@ -1,5 +1,14 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import {
+    Globe2,
+    Images,
+    LayoutGrid,
+    Newspaper,
+    Package,
+    Users2,
+    Wrench,
+} from 'lucide-react';
+
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -14,6 +23,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import dashboardRoutes from '@/routes/dashboard';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -22,19 +32,39 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
     },
+    {
+        title: 'Klien',
+        href: dashboardRoutes.clients.index(),
+        icon: Users2,
+    },
+    {
+        title: 'Layanan',
+        href: dashboardRoutes.services.index(),
+        icon: Wrench,
+    },
+    {
+        title: 'Produk',
+        href: dashboardRoutes.products.index(),
+        icon: Package,
+    },
+    {
+        title: 'Galeri',
+        href: dashboardRoutes.gallery.index(),
+        icon: Images,
+    },
+    {
+        title: 'Artikel',
+        href: dashboardRoutes.articles.index(),
+        icon: Newspaper,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: FolderGit2,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
+        title: 'Lihat Website',
+        href: '/',
+        icon: Globe2,
+    }
 ];
 
 export function AppSidebar() {

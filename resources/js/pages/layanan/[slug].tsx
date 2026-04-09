@@ -7,7 +7,17 @@ import Whatsapp from '@/components/custom/Whatsapp';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { SERVICES } from '@/section/Services';
+
+interface ServiceItem {
+    id: number;
+    slug: string;
+    title: string;
+    description: string;
+    longDescription?: string | null;
+    image: string;
+    gallery: string[];
+    features: string[];
+}
 
 const WA_NUMBER = '6281234567890';
 
@@ -16,11 +26,11 @@ function getWhatsAppUrl(message: string) {
 }
 
 interface ServiceDetailProps {
-    slug: string;
+    service: ServiceItem | null;
+    otherServices: ServiceItem[];
 }
 
-export default function ServiceDetail({ slug }: ServiceDetailProps) {
-    const service = SERVICES.find((s) => s.slug === slug);
+export default function ServiceDetail({ service, otherServices }: ServiceDetailProps) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [lightboxOpen, setLightboxOpen] = useState(false);
 
@@ -46,7 +56,7 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
         );
     }
 
-    const otherServices = SERVICES.filter((s) => s.slug !== slug).slice(0, 3);
+    const galleryImages = service.gallery.length > 0 ? service.gallery : [service.image];
 
     return (
         <>
@@ -65,7 +75,7 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
                         </Link>
                         <span>/</span>
                         <Link
-                            href="/#layanan"
+                            href="/layanan"
                             className="transition-colors hover:text-foreground"
                         >
                             Layanan
@@ -84,7 +94,7 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
                                 onClick={() => setLightboxOpen(true)}
                             >
                                 <img
-                                    src={service.gallery[selectedImage]}
+                                    src={galleryImages[selectedImage]}
                                     alt={`${service.title} - Gambar ${selectedImage + 1}`}
                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
@@ -96,7 +106,7 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
 
                             {/* Thumbnails */}
                             <div className="grid grid-cols-4 gap-3">
-                                {service.gallery.map((img, index) => (
+                                {galleryImages.map((img, index) => (
                                     <button
                                         key={index}
                                         onClick={() => setSelectedImage(index)}
@@ -126,7 +136,7 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
                             </div>
 
                             <p className="text-lg leading-relaxed text-muted-foreground">
-                                {service.longDescription}
+                                {service.longDescription ?? service.description}
                             </p>
 
                             {/* Features */}
@@ -192,7 +202,7 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
                                     Layanan Lainnya
                                 </h2>
                                 <Button asChild variant="ghost">
-                                    <Link href="/#layanan">
+                                    <Link href="/layanan">
                                         Lihat Semua
                                         <ArrowRight className="ml-1 h-4 w-4" />
                                     </Link>
@@ -237,8 +247,8 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
                             onClick={() =>
                                 setSelectedImage(
                                     (prev) =>
-                                        (prev - 1 + service.gallery.length) %
-                                        service.gallery.length,
+                                        (prev - 1 + galleryImages.length) %
+                                        galleryImages.length,
                                 )
                             }
                             className="absolute left-2 z-10 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
@@ -246,7 +256,7 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
                             <ArrowLeft className="h-6 w-6" />
                         </button>
                         <img
-                            src={service.gallery[selectedImage]}
+                            src={galleryImages[selectedImage]}
                             alt={`${service.title} - Gambar ${selectedImage + 1}`}
                             className="max-h-[80vh] w-full rounded-lg object-contain"
                         />
@@ -254,7 +264,7 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
                             onClick={() =>
                                 setSelectedImage(
                                     (prev) =>
-                                        (prev + 1) % service.gallery.length,
+                                        (prev + 1) % galleryImages.length,
                                 )
                             }
                             className="absolute right-2 z-10 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
@@ -263,7 +273,7 @@ export default function ServiceDetail({ slug }: ServiceDetailProps) {
                         </button>
                     </div>
                     <div className="mt-2 flex justify-center gap-2">
-                        {service.gallery.map((_, index) => (
+                        {galleryImages.map((_, index) => (
                             <button
                                 key={index}
                                 onClick={() => setSelectedImage(index)}

@@ -2,22 +2,24 @@ import { Link } from '@inertiajs/react';
 import { Menu, Phone } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-import { cn } from '@/lib/utils';
-
 import { Button } from '@/components/ui/button';
 import {
     Sheet,
+    SheetClose,
     SheetContent,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
     { name: 'Beranda', href: '/' },
-    { name: 'Tentang', href: '/tentang' },
+    { name: 'Tentang Kami', href: '/tentang' },
     { name: 'Layanan', href: '/layanan' },
-    { name: 'Kontak', href: '/kontak' },
+    { name: 'Produk', href: '/produk' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Artikel', href: '/artikel' },
 ];
 
 const NAV_CTA = {
@@ -33,11 +35,15 @@ export default function Navbar({ transparent = false }: NavbarProps) {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        if (!transparent) return;
+        if (!transparent) {
+            return;
+        }
 
         const handleScroll = () => setScrolled(window.scrollY > 50);
+
         handleScroll();
         window.addEventListener('scroll', handleScroll);
+
         return () => window.removeEventListener('scroll', handleScroll);
     }, [transparent]);
 
@@ -55,7 +61,7 @@ export default function Navbar({ transparent = false }: NavbarProps) {
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center space-x-2">
                         <img
-                            src="/logo/logo.jpeg"
+                            src="/logo/logo.webp"
                             alt="Logo Pariwara"
                             className="h-12 w-auto rounded-sm"
                         />
@@ -121,27 +127,46 @@ export default function Navbar({ transparent = false }: NavbarProps) {
                                 <span className="sr-only">Menu Toggle</span>
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="right">
-                            <SheetHeader>
+                        <SheetContent
+                            side="right"
+                            className="w-[86vw] max-w-sm gap-0 p-0"
+                        >
+                            <SheetHeader className="border-b border-border/70 px-5 pt-6 pb-4">
                                 <SheetTitle className="text-left text-xl select-none">
                                     Menu Utama
                                 </SheetTitle>
+                                <p className="text-muted-foreground mt-1 text-xs">
+                                    CV. Pariwara Satu Sae
+                                </p>
                             </SheetHeader>
-                            <div className="mt-4 flex flex-col gap-4">
-                                {NAV_LINKS.map((link) => (
-                                    <Link
-                                        key={link.name}
-                                        href={link.href}
-                                        className="text-base font-medium text-foreground transition-colors hover:text-primary"
-                                    >
-                                        {link.name}
-                                    </Link>
-                                ))}
-                                <Button asChild className="mt-4 w-full">
-                                    <Link href={NAV_CTA.href}>
-                                        {NAV_CTA.label}
-                                    </Link>
-                                </Button>
+                            <div className="flex h-full flex-col px-4 pb-5">
+                                <nav className="mt-4 space-y-1.5">
+                                    {NAV_LINKS.map((link) => (
+                                        <SheetClose asChild key={link.name}>
+                                            <Link
+                                                href={link.href}
+                                                className="hover:bg-muted/70 hover:text-foreground block rounded-xl px-4 py-3 text-[15px] font-medium text-foreground/80 transition-colors"
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        </SheetClose>
+                                    ))}
+                                </nav>
+
+                                <div className="mt-5 border-t border-border/70 pt-5">
+                                    <SheetClose asChild>
+                                        <Button asChild className="h-11 w-full">
+                                            <Link href={NAV_CTA.href}>
+                                                <Phone className="h-4 w-4" />
+                                                {NAV_CTA.label}
+                                            </Link>
+                                        </Button>
+                                    </SheetClose>
+                                    <p className="text-muted-foreground mt-3 px-1 text-xs leading-relaxed">
+                                        Konsultasi gratis untuk kebutuhan signage dan
+                                        branding bisnis Anda.
+                                    </p>
+                                </div>
                             </div>
                         </SheetContent>
                     </Sheet>

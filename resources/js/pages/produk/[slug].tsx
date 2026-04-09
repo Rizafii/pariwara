@@ -7,7 +7,18 @@ import Whatsapp from '@/components/custom/Whatsapp';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { PRODUCTS } from '@/section/Products';
+
+interface ProductItem {
+    id: number;
+    slug: string;
+    name: string;
+    description: string;
+    longDescription?: string | null;
+    price: string;
+    image: string;
+    gallery: string[];
+    features: string[];
+}
 
 const WA_NUMBER = '6281234567890';
 
@@ -16,11 +27,11 @@ function getWhatsAppUrl(message: string) {
 }
 
 interface ProductDetailProps {
-    slug: string;
+    product: ProductItem | null;
+    otherProducts: ProductItem[];
 }
 
-export default function ProductDetail({ slug }: ProductDetailProps) {
-    const product = PRODUCTS.find((p) => p.slug === slug);
+export default function ProductDetail({ product, otherProducts }: ProductDetailProps) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [lightboxOpen, setLightboxOpen] = useState(false);
 
@@ -46,7 +57,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
         );
     }
 
-    const otherProducts = PRODUCTS.filter((p) => p.slug !== slug).slice(0, 4);
+    const galleryImages = product.gallery.length > 0 ? product.gallery : [product.image];
 
     return (
         <>
@@ -65,7 +76,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                         </Link>
                         <span>/</span>
                         <Link
-                            href="/#produk"
+                            href="/produk"
                             className="transition-colors hover:text-foreground"
                         >
                             Produk
@@ -84,7 +95,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                                 onClick={() => setLightboxOpen(true)}
                             >
                                 <img
-                                    src={product.gallery[selectedImage]}
+                                    src={galleryImages[selectedImage]}
                                     alt={`${product.name} - Gambar ${selectedImage + 1}`}
                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
@@ -96,7 +107,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
 
                             {/* Thumbnails */}
                             <div className="grid grid-cols-4 gap-3">
-                                {product.gallery.map((img, index) => (
+                                {galleryImages.map((img, index) => (
                                     <button
                                         key={index}
                                         onClick={() => setSelectedImage(index)}
@@ -140,7 +151,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                             </div>
 
                             <p className="text-lg leading-relaxed text-muted-foreground">
-                                {product.longDescription}
+                                {product.longDescription ?? product.description}
                             </p>
 
                             {/* Features */}
@@ -206,7 +217,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                                     Produk Lainnya
                                 </h2>
                                 <Button asChild variant="ghost">
-                                    <Link href="/#produk">
+                                    <Link href="/produk">
                                         Lihat Semua
                                         <ArrowRight className="ml-1 h-4 w-4" />
                                     </Link>
@@ -254,8 +265,8 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                             onClick={() =>
                                 setSelectedImage(
                                     (prev) =>
-                                        (prev - 1 + product.gallery.length) %
-                                        product.gallery.length,
+                                        (prev - 1 + galleryImages.length) %
+                                        galleryImages.length,
                                 )
                             }
                             className="absolute left-2 z-10 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
@@ -263,7 +274,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                             <ArrowLeft className="h-6 w-6" />
                         </button>
                         <img
-                            src={product.gallery[selectedImage]}
+                            src={galleryImages[selectedImage]}
                             alt={`${product.name} - Gambar ${selectedImage + 1}`}
                             className="max-h-[80vh] w-full rounded-lg object-contain"
                         />
@@ -271,7 +282,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                             onClick={() =>
                                 setSelectedImage(
                                     (prev) =>
-                                        (prev + 1) % product.gallery.length,
+                                        (prev + 1) % galleryImages.length,
                                 )
                             }
                             className="absolute right-2 z-10 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
@@ -280,7 +291,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                         </button>
                     </div>
                     <div className="mt-2 flex justify-center gap-2">
-                        {product.gallery.map((_, index) => (
+                        {galleryImages.map((_, index) => (
                             <button
                                 key={index}
                                 onClick={() => setSelectedImage(index)}

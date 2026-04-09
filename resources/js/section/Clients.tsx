@@ -1,41 +1,13 @@
 import { Badge } from '@/components/ui/badge';
 
-const CLIENT_BRANDS = [
-    {
-        name: 'Brand 1',
-        logo: 'https://placehold.co/180x80/e2e8f0/64748b?text=Brand+1',
-    },
-    {
-        name: 'Brand 2',
-        logo: 'https://placehold.co/180x80/e2e8f0/64748b?text=Brand+2',
-    },
-    {
-        name: 'Brand 3',
-        logo: 'https://placehold.co/180x80/e2e8f0/64748b?text=Brand+3',
-    },
-    {
-        name: 'Brand 4',
-        logo: 'https://placehold.co/180x80/e2e8f0/64748b?text=Brand+4',
-    },
-    {
-        name: 'Brand 5',
-        logo: 'https://placehold.co/180x80/e2e8f0/64748b?text=Brand+5',
-    },
-    {
-        name: 'Brand 6',
-        logo: 'https://placehold.co/180x80/e2e8f0/64748b?text=Brand+6',
-    },
-    {
-        name: 'Brand 7',
-        logo: 'https://placehold.co/180x80/e2e8f0/64748b?text=Brand+7',
-    },
-    {
-        name: 'Brand 8',
-        logo: 'https://placehold.co/180x80/e2e8f0/64748b?text=Brand+8',
-    },
-];
+interface ClientItem {
+    id: number;
+    name: string;
+    logo: string;
+    url?: string | null;
+}
 
-export default function Clients() {
+export default function Clients({ clients = [] }: { clients?: ClientItem[] }) {
     return (
         <section className="bg-background py-16 sm:py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-28">
@@ -53,16 +25,30 @@ export default function Clients() {
 
                 {/* Logo Grid */}
                 <div className="mt-12 grid grid-cols-2 items-center gap-8 sm:grid-cols-3 md:grid-cols-4">
-                    {CLIENT_BRANDS.map((brand) => (
+                    {clients.map((brand) => (
                         <div
-                            key={brand.name}
-                            className="flex items-center justify-center rounded-xl border border-border/50 bg-muted/30 p-6 grayscale transition-all duration-300 hover:bg-muted/60 hover:grayscale-0"
+                            key={brand.id}
+                            className="flex items-center justify-center transition-all duration-300 "
                         >
-                            <img
-                                src={brand.logo}
-                                alt={brand.name}
-                                className="h-10 w-auto max-w-35 object-contain"
-                            />
+                            {brand.url ? (
+                                <a
+                                    href={brand.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <img
+                                        src={brand.logo}
+                                        alt={brand.name}
+                                        className="h-10 w-auto max-w-35 object-contain"
+                                    />
+                                </a>
+                            ) : (
+                                <img
+                                    src={brand.logo}
+                                    alt={brand.name}
+                                    className="h-10 w-auto max-w-35 object-contain"
+                                />
+                            )}
                         </div>
                     ))}
                 </div>

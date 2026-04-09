@@ -141,3 +141,18 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer components {
+    .cms-quill .ql-toolbar.ql-snow {
+        @apply border-0 border-b border-border bg-muted/50;
+    }
+
+    .cms-quill .ql-container.ql-snow {
+        @apply border-0 text-sm;
+        min-height: 260px;
+    }
+
+    .cms-quill .ql-editor {
+        min-height: 260px;
+    }
+}
