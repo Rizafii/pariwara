@@ -20,7 +20,7 @@ interface ProductItem {
     features: string[];
 }
 
-const WA_NUMBER = '6281234567890';
+const WA_NUMBER = '6285136816957';
 
 function getWhatsAppUrl(message: string) {
     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;

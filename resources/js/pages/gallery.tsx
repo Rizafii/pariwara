@@ -160,7 +160,7 @@ export default function GalleryPage({ items }: GalleryPageProps) {
 
                             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
                                 <Button asChild size="lg">
-                                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://wa.me/6285136816957" target="_blank" rel="noopener noreferrer">
                                         Konsultasi Gratis
                                         <ArrowRight className="h-4 w-4" />
                                     </a>

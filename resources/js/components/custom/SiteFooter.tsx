@@ -96,8 +96,8 @@ export default function SiteFooter() {
                             </li>
                             <li className="flex items-start gap-2">
                                 <Phone className="mt-0.5 h-4 w-4 text-primary" />
-                                <a href="tel:+6281234567890" className="transition-colors hover:text-primary">
-                                    +62 812-3456-7890
+                                <a href="tel:+6285136816957" className="transition-colors hover:text-primary">
+                                    +62 851-3681-6957
                                 </a>
                             </li>
                             <li className="flex items-start gap-2">
@@ -112,7 +112,7 @@ export default function SiteFooter() {
                             <li className="flex items-start gap-2">
                                 <MessageCircleMore className="mt-0.5 h-4 w-4 text-primary" />
                                 <a
-                                    href="https://wa.me/6281234567890"
+                                    href="https://wa.me/6285136816957"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="transition-colors hover:text-primary"
@@ -134,7 +134,7 @@ export default function SiteFooter() {
                             Insight
                         </Link>
                         <a
-                            href="https://wa.me/6281234567890"
+                            href="https://wa.me/6285136816957"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="transition-colors hover:text-primary"

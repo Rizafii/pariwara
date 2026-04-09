@@ -24,7 +24,7 @@ const NAV_LINKS = [
 
 const NAV_CTA = {
     label: 'Hubungi Kami',
-    href: '/kontak',
+    href: 'https://wa.me/6285136816957',
 };
 
 interface NavbarProps {

@@ -46,7 +46,7 @@ const STATS = [
 ];
 
 const CONSULTATION_URL =
-    'https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20konsultasi%20kebutuhan%20signage%20dan%20branding.';
+    'https://wa.me/6285136816957?text=Halo,%20saya%20ingin%20konsultasi%20kebutuhan%20signage%20dan%20branding.';
 
 export default function AboutPage() {
     return (

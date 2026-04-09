@@ -122,7 +122,7 @@ export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelD
                                     Simpan atau bagikan insight ini ke tim Anda sebagai referensi proyek berikutnya.
                                 </p>
                                 <Button asChild variant="outline" className="mt-4 w-full">
-                                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://wa.me/6285136816957" target="_blank" rel="noopener noreferrer">
                                         <Share2 className="h-4 w-4" />
                                         Bagikan via WhatsApp
                                     </a>
@@ -135,7 +135,7 @@ export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelD
                                     Tim kami siap bantu merekomendasikan desain dan material yang paling cocok.
                                 </p>
                                 <Button asChild className="mt-4 w-full">
-                                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://wa.me/6285136816957" target="_blank" rel="noopener noreferrer">
                                         Konsultasi Gratis
                                         <ArrowRight className="h-4 w-4" />
                                     </a>

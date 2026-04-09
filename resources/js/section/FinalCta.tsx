@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 const CONSULTATION_URL =
-    'https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20konsultasi%20untuk%20kebutuhan%20branding%20dan%20signage%20bisnis%20saya.';
+    'https://wa.me/6285136816957?text=Halo,%20saya%20ingin%20konsultasi%20untuk%20kebutuhan%20branding%20dan%20signage%20bisnis%20saya.';
 
 export default function FinalCta() {
     return (
