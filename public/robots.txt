@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://domain.com/sitemap.xml
+Sitemap: https://neonsignmalang.com/sitemap.xml
