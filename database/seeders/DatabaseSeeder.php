@@ -14,13 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::query()->firstOrCreate([
-            'email' => 'test@example.com',
-        ], [
-            'name' => 'Test User',
-            'password' => Hash::make('password'),
-        ]);
-
-        $this->call(WebsiteContentSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

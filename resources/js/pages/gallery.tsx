@@ -1,9 +1,11 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { ArrowRight, Images, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
+import SeoHead from '@/components/seo/seo-head';
+import type { SeoMeta } from '@/components/seo/seo-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
@@ -19,9 +21,10 @@ interface GalleryItem {
 
 interface GalleryPageProps {
     items: GalleryItem[];
+    meta: SeoMeta;
 }
 
-export default function GalleryPage({ items }: GalleryPageProps) {
+export default function GalleryPage({ items, meta }: GalleryPageProps) {
     const [activeFilter, setActiveFilter] = useState('Semua');
     const [selectedImageId, setSelectedImageId] = useState<number | null>(null);
 
@@ -47,7 +50,7 @@ export default function GalleryPage({ items }: GalleryPageProps) {
 
     return (
         <>
-            <Head title="Gallery" />
+            <SeoHead meta={meta} />
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">

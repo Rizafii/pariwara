@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Website;
 
+use App\Http\Controllers\Concerns\BuildsSeoMeta;
 use App\Http\Controllers\Concerns\InteractsWithMedia;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\GalleryItem;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class ArticleController extends Controller
 {
+    use BuildsSeoMeta;
     use InteractsWithMedia;
 
     public function index(): Response
@@ -22,8 +25,23 @@ class ArticleController extends Controller
             ->get()
             ->map(fn (Article $article) => $this->transformArticle($article, false));
 
+        $metaImage = $articles->first()['image']
+            ?? $this->toPublicUrl(
+                GalleryItem::query()->where('is_active', true)->inRandomOrder()->value('image'),
+            );
+
         return Inertia::render('artikel', [
             'articles' => $articles,
+            'meta' => $this->buildSeoMeta([
+                'title' => 'Artikel Neon Sign & Branding Usaha | Malang',
+                'description' => 'Tips dan inspirasi neon sign untuk bisnis di Malang.',
+                'keywords' => [
+                    'artikel neon sign malang',
+                    'branding usaha malang',
+                ],
+                'image' => $metaImage,
+                'url' => route('artikel.index'),
+            ]),
         ]);
     }
 
@@ -45,10 +63,32 @@ class ArticleController extends Controller
             ->get()
             ->map(fn (Article $item) => $this->transformArticle($item, false));
 
+        $description = $this->excerptFromHtml($article->content, 150);
+
+        if ($description === '') {
+            $description = $this->excerptFromHtml($article->excerpt, 150);
+        }
+
+        $metaImage = $this->toPublicUrl($article->image)
+            ?? $this->toPublicUrl(
+                GalleryItem::query()->where('is_active', true)->inRandomOrder()->value('image'),
+            );
+
         return Inertia::render('artikel/[slug]', [
             'slug' => $slug,
             'article' => $this->transformArticle($article, true),
             'relatedArticles' => $relatedArticles,
+            'meta' => $this->buildSeoMeta([
+                'title' => $article->title.' CV. PARIWARA SATU SAE',
+                'description' => $description,
+                'keywords' => [
+                    $article->title,
+                    'neon sign malang',
+                    'jawa timur',
+                ],
+                'image' => $metaImage,
+                'url' => route('artikel.show', ['slug' => $slug]),
+            ]),
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Website;
 
+use App\Http\Controllers\Concerns\BuildsSeoMeta;
 use App\Http\Controllers\Concerns\InteractsWithMedia;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
@@ -14,6 +15,7 @@ use Inertia\Response;
 
 class HomeController extends Controller
 {
+    use BuildsSeoMeta;
     use InteractsWithMedia;
 
     public function __invoke(): Response
@@ -97,12 +99,28 @@ class HomeController extends Controller
                 'author' => $article->user?->name ?? $article->author,
             ]);
 
+        $featuredGalleryImage = $galleryItems->isNotEmpty()
+            ? ($galleryItems->random()['image'] ?? null)
+            : null;
+
         return Inertia::render('welcome', [
             'clients' => $clients,
             'services' => $services,
             'products' => $products,
             'galleryItems' => $galleryItems,
             'articleItems' => $articleItems,
+            'meta' => $this->buildSeoMeta([
+                'title' => "Jasa Neon Sign Malang Custom | Orion's Melody",
+                'description' => 'Jasa pembuatan neon sign custom di Malang, berkualitas premium dan harga terjangkau.',
+                'keywords' => [
+                    'neon sign malang',
+                    'neon box malang',
+                    'signage malang',
+                    'jawa timur',
+                ],
+                'image' => $featuredGalleryImage,
+                'url' => route('home'),
+            ]),
         ]);
     }
 }

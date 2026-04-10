@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @class(['dark' => ($appearance ?? 'system') == 'dark'])>
     <head>
+        @php
+            $defaultSeoTitle = "Jasa Neon Sign Malang | CV. PARIWARA SATU SAE";
+            $defaultSeoDescription = 'Jasa pembuatan neon sign custom di Malang, berkualitas premium dan harga terjangkau.';
+            $defaultSeoKeywords = 'neon sign malang, neon box malang, signage malang, branding usaha malang, jawa timur';
+            $defaultSeoUrl = rtrim(config('app.url', request()->getSchemeAndHttpHost()), '/');
+            $defaultSeoImage = $defaultSeoUrl.'/logo/logo.webp';
+        @endphp
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -46,7 +54,21 @@
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         <x-inertia::head>
-            <title>{{ config('app.name', 'Laravel') }}</title>
+            <title>{{ $defaultSeoTitle }}</title>
+            <meta name="description" content="{{ $defaultSeoDescription }}">
+            <meta name="keywords" content="{{ $defaultSeoKeywords }}">
+
+            <meta property="og:type" content="website">
+            <meta property="og:title" content="{{ $defaultSeoTitle }}">
+            <meta property="og:description" content="{{ $defaultSeoDescription }}">
+            <meta property="og:image" content="{{ $defaultSeoImage }}">
+            <meta property="og:url" content="{{ $defaultSeoUrl }}">
+            <link rel="canonical" href="{{ $defaultSeoUrl }}">
+
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="{{ $defaultSeoTitle }}">
+            <meta name="twitter:description" content="{{ $defaultSeoDescription }}">
+            <meta name="twitter:image" content="{{ $defaultSeoImage }}">
         </x-inertia::head>
     </head>
     <body class="font-sans antialiased">

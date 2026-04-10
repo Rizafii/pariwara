@@ -1,9 +1,11 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { ArrowLeft, ArrowRight, Check, Phone } from 'lucide-react';
 import { useState } from 'react';
 
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
+import SeoHead from '@/components/seo/seo-head';
+import type { SeoMeta } from '@/components/seo/seo-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
@@ -26,18 +28,27 @@ function getWhatsAppUrl(message: string) {
 }
 
 interface ServiceDetailProps {
+    meta: SeoMeta;
     service: ServiceItem | null;
     otherServices: ServiceItem[];
 }
 
-export default function ServiceDetail({ service, otherServices }: ServiceDetailProps) {
+export default function ServiceDetail({ service, otherServices, meta }: ServiceDetailProps) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [lightboxOpen, setLightboxOpen] = useState(false);
 
     if (!service) {
         return (
             <>
-                <Head title="Layanan Tidak Ditemukan" />
+                <SeoHead
+                    meta={{
+                        title: 'Layanan Tidak Ditemukan | CV. PARIWARA SATU SAE',
+                        description: 'Layanan yang Anda cari tidak tersedia atau sudah dipindahkan.',
+                        keywords: 'layanan neon sign malang, signage malang',
+                        image: meta.image,
+                        url: meta.url,
+                    }}
+                />
                 <Navbar />
                 <main className="flex min-h-screen items-center justify-center px-4">
                     <section className="text-center">
@@ -56,7 +67,7 @@ export default function ServiceDetail({ service, otherServices }: ServiceDetailP
 
     return (
         <>
-            <Head title={service.title} />
+            <SeoHead meta={meta} />
             <Navbar />
 
             <main className="bg-background pt-32 pb-16">
