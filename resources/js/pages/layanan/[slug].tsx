@@ -39,19 +39,15 @@ export default function ServiceDetail({ service, otherServices }: ServiceDetailP
             <>
                 <Head title="Layanan Tidak Ditemukan" />
                 <Navbar />
-                <div className="flex min-h-screen items-center justify-center">
-                    <div className="text-center">
-                        <h1 className="text-4xl font-bold text-foreground">
-                            404
-                        </h1>
-                        <p className="mt-2 text-muted-foreground">
-                            Layanan tidak ditemukan.
-                        </p>
+                <main className="flex min-h-screen items-center justify-center px-4">
+                    <section className="text-center">
+                        <h1 className="text-4xl font-bold text-foreground">404</h1>
+                        <p className="mt-2 text-muted-foreground">Layanan tidak ditemukan.</p>
                         <Button asChild className="mt-6">
                             <Link href="/">Kembali ke Beranda</Link>
                         </Button>
-                    </div>
-                </div>
+                    </section>
+                </main>
             </>
         );
     }
@@ -66,7 +62,7 @@ export default function ServiceDetail({ service, otherServices }: ServiceDetailP
             <main className="bg-background pt-32 pb-16">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-28">
                     {/* Breadcrumb */}
-                    <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
+                    <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
                         <Link
                             href="/"
                             className="transition-colors hover:text-foreground"
@@ -81,7 +77,9 @@ export default function ServiceDetail({ service, otherServices }: ServiceDetailP
                             Layanan
                         </Link>
                         <span>/</span>
-                        <span className="text-foreground">{service.title}</span>
+                        <span className="text-foreground" aria-current="page">
+                            {service.title}
+                        </span>
                     </nav>
 
                     {/* Hero Section */}
@@ -105,25 +103,26 @@ export default function ServiceDetail({ service, otherServices }: ServiceDetailP
                             </div>
 
                             {/* Thumbnails */}
-                            <div className="grid grid-cols-4 gap-3">
+                            <ul className="grid grid-cols-4 gap-3">
                                 {galleryImages.map((img, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => setSelectedImage(index)}
-                                        className={`aspect-4/3 overflow-hidden rounded-xl border-2 transition-all duration-200 ${
-                                            selectedImage === index
-                                                ? 'border-primary shadow-md'
-                                                : 'border-border/50 opacity-60 hover:opacity-100'
-                                        }`}
-                                    >
-                                        <img
-                                            src={img}
-                                            alt={`Thumbnail ${index + 1}`}
-                                            className="h-full w-full object-cover"
-                                        />
-                                    </button>
+                                    <li key={index}>
+                                        <button
+                                            onClick={() => setSelectedImage(index)}
+                                            className={`aspect-4/3 overflow-hidden rounded-xl border-2 transition-all duration-200 ${
+                                                selectedImage === index
+                                                    ? 'border-primary shadow-md'
+                                                    : 'border-border/50 opacity-60 hover:opacity-100'
+                                            }`}
+                                        >
+                                            <img
+                                                src={img}
+                                                alt={`Thumbnail ${index + 1}`}
+                                                className="h-full w-full object-cover"
+                                            />
+                                        </button>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                         </div>
 
                         {/* Details */}
@@ -196,9 +195,9 @@ export default function ServiceDetail({ service, otherServices }: ServiceDetailP
 
                     {/* Other Services */}
                     {otherServices.length > 0 && (
-                        <div className="mt-20">
+                        <section className="mt-20" aria-labelledby="other-services-heading">
                             <div className="flex items-center justify-between">
-                                <h2 className="text-2xl font-bold text-foreground">
+                                <h2 id="other-services-heading" className="text-2xl font-bold text-foreground">
                                     Layanan Lainnya
                                 </h2>
                                 <Button asChild variant="ghost">
@@ -208,33 +207,33 @@ export default function ServiceDetail({ service, otherServices }: ServiceDetailP
                                     </Link>
                                 </Button>
                             </div>
-                            <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                            <ul className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                                 {otherServices.map((s) => (
-                                    <Link
-                                        key={s.slug}
-                                        href={`/layanan/${s.slug}`}
-                                        className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                                    >
-                                        <div className="relative h-48 overflow-hidden">
-                                            <img
-                                                src={s.image}
-                                                alt={s.title}
-                                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                            />
-                                            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
-                                        </div>
-                                        <div className="p-6">
-                                            <h3 className="truncate text-lg font-bold text-foreground">
-                                                {s.title}
-                                            </h3>
-                                            <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                                                {s.description}
-                                            </p>
-                                        </div>
-                                    </Link>
+                                    <li key={s.slug}>
+                                        <article className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                            <Link href={`/layanan/${s.slug}`}>
+                                                <div className="relative h-48 overflow-hidden">
+                                                    <img
+                                                        src={s.image}
+                                                        alt={s.title}
+                                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    />
+                                                    <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
+                                                </div>
+                                                <div className="p-6">
+                                                    <h3 className="truncate text-lg font-bold text-foreground">
+                                                        {s.title}
+                                                    </h3>
+                                                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                                                        {s.description}
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        </article>
+                                    </li>
                                 ))}
-                            </div>
-                        </div>
+                            </ul>
+                        </section>
                     )}
                 </div>
             </main>

@@ -23,7 +23,11 @@ export default function Articles({ articles = [] }: { articles?: ArticleItem[] }
     }
 
     return (
-        <section id="artikel" className="bg-background py-16 sm:py-20">
+        <section
+            id="artikel"
+            className="bg-background py-16 sm:py-20"
+            aria-labelledby="articles-heading"
+        >
             <div className="container mx-auto px-4 sm:px-6 lg:px-28">
                 <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
                     <div>
@@ -31,7 +35,10 @@ export default function Articles({ articles = [] }: { articles?: ArticleItem[] }
                             <BookOpen className="h-4 w-4" />
                             Wawasan Branding Visual
                         </Badge>
-                        <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                        <h2
+                            id="articles-heading"
+                            className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+                        >
                             Artikel Terbaru
                         </h2>
                     </div>
@@ -68,7 +75,7 @@ export default function Articles({ articles = [] }: { articles?: ArticleItem[] }
                             </p>
 
                             <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-4 text-xs text-muted-foreground sm:text-sm">
-                                <span>{featuredArticle.date ?? '-'}</span>
+                                <time>{featuredArticle.date ?? '-'}</time>
                                 <span className="inline-flex items-center gap-1">
                                     <Clock3 className="h-4 w-4" />
                                     {featuredArticle.readTime ?? '-'}
@@ -77,35 +84,34 @@ export default function Articles({ articles = [] }: { articles?: ArticleItem[] }
                         </div>
                     </article>
 
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1">
+                    <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1">
                         {otherArticles.map((article) => (
-                            <article
-                                key={article.slug}
-                                className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                            >
-                                <Link href={`/artikel/${article.slug}`} className="block h-52 overflow-hidden">
-                                    <img
-                                        src={article.image ?? 'https://placehold.co/1200x760/111d2f/f8fafc?text=Artikel'}
-                                        alt={article.title}
-                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                    />
-                                </Link>
-                                <div className="space-y-3 p-5">
-                                    <Badge variant="outline">{article.category ?? 'Artikel'}</Badge>
-                                    <h3 className="line-clamp-2 text-lg font-bold leading-tight text-foreground">
-                                        {article.title}
-                                    </h3>
-                                    <p className="line-clamp-2 text-sm text-muted-foreground">
-                                        {article.excerpt}
-                                    </p>
-                                    <div className="flex items-center justify-between border-t border-border/60 pt-3 text-xs text-muted-foreground">
-                                        <span>{article.date ?? '-'}</span>
-                                        <span>{article.readTime ?? '-'}</span>
+                            <li key={article.slug}>
+                                <article className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                    <Link href={`/artikel/${article.slug}`} className="block h-52 overflow-hidden">
+                                        <img
+                                            src={article.image ?? 'https://placehold.co/1200x760/111d2f/f8fafc?text=Artikel'}
+                                            alt={article.title}
+                                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                    </Link>
+                                    <div className="space-y-3 p-5">
+                                        <Badge variant="outline">{article.category ?? 'Artikel'}</Badge>
+                                        <h3 className="line-clamp-2 text-lg font-bold leading-tight text-foreground">
+                                            {article.title}
+                                        </h3>
+                                        <p className="line-clamp-2 text-sm text-muted-foreground">
+                                            {article.excerpt}
+                                        </p>
+                                        <div className="flex items-center justify-between border-t border-border/60 pt-3 text-xs text-muted-foreground">
+                                            <time>{article.date ?? '-'}</time>
+                                            <span>{article.readTime ?? '-'}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
+                                </article>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
 
                 <div className="mt-8 flex justify-center">

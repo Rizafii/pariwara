@@ -58,7 +58,10 @@ export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelD
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">
-                <section className="border-b border-border/60 bg-muted/30 py-12">
+                <section
+                    className="border-b border-border/60 bg-muted/30 py-12"
+                    aria-labelledby="article-heading"
+                >
                     <div className="container mx-auto px-4 sm:px-6 lg:px-28">
                         <Link
                             href="/artikel"
@@ -70,12 +73,15 @@ export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelD
 
                         <div className="mt-6 max-w-4xl">
                             <Badge variant="outline">{article.category}</Badge>
-                            <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                            <h1
+                                id="article-heading"
+                                className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+                            >
                                 {article.title}
                             </h1>
 
                             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-                                <span>{article.date ?? '-'}</span>
+                                <time>{article.date ?? '-'}</time>
                                 <span className="inline-flex items-center gap-1">
                                     <Clock3 className="h-4 w-4" />
                                     {article.readTime ?? '-'}
@@ -86,13 +92,16 @@ export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelD
                     </div>
                 </section>
 
-                <section className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28">
+                <section className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28" aria-labelledby="article-content-heading">
+                    <h2 id="article-content-heading" className="sr-only">
+                        Konten artikel
+                    </h2>
                     <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_320px] lg:items-start">
                         <article className="overflow-hidden rounded-3xl border border-border/60 bg-background shadow-sm">
                             <img
                                 src={article.image ?? 'https://placehold.co/1200x760/111d2f/f8fafc?text=Artikel'}
                                 alt={article.title}
-                                className="h-auto max-h-[520px] w-full object-cover"
+                                className="h-auto max-h-130 w-full object-cover"
                             />
 
                             <div className="space-y-6 p-6 sm:p-8 lg:p-10">
@@ -114,10 +123,13 @@ export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelD
                         </article>
 
                         <aside className="space-y-6 lg:sticky lg:top-28">
-                            <div className="rounded-2xl border border-border/60 bg-background p-6 shadow-xs">
-                                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                            <section className="rounded-2xl border border-border/60 bg-background p-6 shadow-xs" aria-labelledby="share-article-heading">
+                                <h2
+                                    id="share-article-heading"
+                                    className="text-xs uppercase tracking-[0.2em] text-muted-foreground"
+                                >
                                     Bagikan Artikel
-                                </p>
+                                </h2>
                                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                                     Simpan atau bagikan insight ini ke tim Anda sebagai referensi proyek berikutnya.
                                 </p>
@@ -127,10 +139,15 @@ export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelD
                                         Bagikan via WhatsApp
                                     </a>
                                 </Button>
-                            </div>
+                            </section>
 
-                            <div className="rounded-2xl border border-border/60 bg-background p-6 shadow-xs">
-                                <p className="text-base font-semibold text-foreground">Butuh Konsultasi Proyek?</p>
+                            <section
+                                className="rounded-2xl border border-border/60 bg-background p-6 shadow-xs"
+                                aria-labelledby="consultation-heading"
+                            >
+                                <h2 id="consultation-heading" className="text-base font-semibold text-foreground">
+                                    Butuh Konsultasi Proyek?
+                                </h2>
                                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                                     Tim kami siap bantu merekomendasikan desain dan material yang paling cocok.
                                 </p>
@@ -140,15 +157,20 @@ export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelD
                                         <ArrowRight className="h-4 w-4" />
                                     </a>
                                 </Button>
-                            </div>
+                            </section>
                         </aside>
                     </div>
                 </section>
 
                 {relatedArticles.length > 0 && (
-                    <section className="container mx-auto px-4 pt-14 sm:px-6 lg:px-28">
+                    <section
+                        className="container mx-auto px-4 pt-14 sm:px-6 lg:px-28"
+                        aria-labelledby="related-articles-heading"
+                    >
                         <div className="flex items-center justify-between">
-                            <h2 className="text-2xl font-bold tracking-tight text-foreground">Artikel Terkait</h2>
+                            <h2 id="related-articles-heading" className="text-2xl font-bold tracking-tight text-foreground">
+                                Artikel Terkait
+                            </h2>
                             <Button asChild variant="ghost">
                                 <Link href="/artikel">
                                     Lihat Semua
@@ -157,37 +179,36 @@ export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelD
                             </Button>
                         </div>
 
-                        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        <ul className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                             {relatedArticles.map((item) => (
-                                <article
-                                    key={item.slug}
-                                    className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                                >
-                                    <Link href={`/artikel/${item.slug}`} className="block h-48 overflow-hidden">
-                                        <img
-                                            src={item.image ?? 'https://placehold.co/1200x760/111d2f/f8fafc?text=Artikel'}
-                                            alt={item.title}
-                                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                        />
-                                    </Link>
-                                    <div className="space-y-3 p-5">
-                                        <Badge variant="outline">{item.category ?? 'Artikel'}</Badge>
-                                        <h3 className="line-clamp-2 text-lg font-bold leading-tight text-foreground">
-                                            {item.title}
-                                        </h3>
-                                        <p className="line-clamp-2 text-sm text-muted-foreground">
-                                            {item.excerpt}
-                                        </p>
-                                        <Button asChild variant="ghost" className="w-full justify-between">
-                                            <Link href={`/artikel/${item.slug}`}>
-                                                Baca Selengkapnya
-                                                <ArrowRight className="h-4 w-4" />
-                                            </Link>
-                                        </Button>
-                                    </div>
-                                </article>
+                                <li key={item.slug}>
+                                    <article className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                        <Link href={`/artikel/${item.slug}`} className="block h-48 overflow-hidden">
+                                            <img
+                                                src={item.image ?? 'https://placehold.co/1200x760/111d2f/f8fafc?text=Artikel'}
+                                                alt={item.title}
+                                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            />
+                                        </Link>
+                                        <div className="space-y-3 p-5">
+                                            <Badge variant="outline">{item.category ?? 'Artikel'}</Badge>
+                                            <h3 className="line-clamp-2 text-lg font-bold leading-tight text-foreground">
+                                                {item.title}
+                                            </h3>
+                                            <p className="line-clamp-2 text-sm text-muted-foreground">
+                                                {item.excerpt}
+                                            </p>
+                                            <Button asChild variant="ghost" className="w-full justify-between">
+                                                <Link href={`/artikel/${item.slug}`}>
+                                                    Baca Selengkapnya
+                                                    <ArrowRight className="h-4 w-4" />
+                                                </Link>
+                                            </Button>
+                                        </div>
+                                    </article>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </section>
                 )}
             </main>

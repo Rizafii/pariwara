@@ -35,7 +35,10 @@ export default function ProductsPage({ products }: ProductsPageProps) {
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">
-                <section className="relative overflow-hidden border-y border-border/40 bg-muted/30 py-14 sm:py-16">
+                <section
+                    className="relative overflow-hidden border-y border-border/40 bg-muted/30 py-14 sm:py-16"
+                    aria-labelledby="products-page-heading"
+                >
                     <div className="pointer-events-none absolute -top-24 left-10 h-72 w-72 rounded-full bg-primary/15 blur-[100px]" />
                     <div className="pointer-events-none absolute -right-10 bottom-0 h-72 w-72 rounded-full bg-primary/10 blur-[100px]" />
 
@@ -46,7 +49,10 @@ export default function ProductsPage({ products }: ProductsPageProps) {
                                     <BadgeDollarSign className="h-4 w-4" />
                                     Katalog Produk Pariwara
                                 </Badge>
-                                <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                                <h1
+                                    id="products-page-heading"
+                                    className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+                                >
                                     Produk Reklame & Signage Siap Produksi
                                 </h1>
                                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -73,66 +79,71 @@ export default function ProductsPage({ products }: ProductsPageProps) {
                     </div>
                 </section>
 
-                <section className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28">
-                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                <section
+                    className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28"
+                    aria-labelledby="products-list-heading"
+                >
+                    <h2 id="products-list-heading" className="sr-only">
+                        Daftar produk
+                    </h2>
+                    <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                         {products.map((product) => (
-                            <article
-                                key={product.slug}
-                                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                            >
-                                <Link href={`/produk/${product.slug}`} className="relative block h-48 overflow-hidden">
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-linear-to-t from-black/45 to-transparent" />
-                                </Link>
+                            <li key={product.slug}>
+                                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                    <Link href={`/produk/${product.slug}`} className="relative block h-48 overflow-hidden">
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-linear-to-t from-black/45 to-transparent" />
+                                    </Link>
 
-                                <div className="flex flex-1 flex-col gap-3 p-5">
-                                    <h2 className="line-clamp-2 text-lg font-bold text-foreground">{product.name}</h2>
-                                    <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                                        {product.description}
-                                    </p>
+                                    <div className="flex flex-1 flex-col gap-3 p-5">
+                                        <h3 className="line-clamp-2 text-lg font-bold text-foreground">{product.name}</h3>
+                                        <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                                            {product.description}
+                                        </p>
 
-                                    <div className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3">
-                                        <p className="text-xs text-muted-foreground">Mulai dari</p>
-                                        <p className="text-xl font-bold text-primary">{product.price}</p>
+                                        <div className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3">
+                                            <p className="text-xs text-muted-foreground">Mulai dari</p>
+                                            <p className="text-xl font-bold text-primary">{product.price}</p>
+                                        </div>
+
+                                        <ul className="space-y-2 pt-1">
+                                            {product.features.slice(0, 2).map((feature) => (
+                                                <li key={feature} className="flex items-start gap-2 text-xs text-muted-foreground">
+                                                    <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                                                    <span>{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        <div className="mt-auto grid grid-cols-1 gap-3 pt-2">
+                                            <Button asChild variant="outline" size="sm">
+                                                <a
+                                                    href={getWhatsAppUrl(
+                                                        `Halo, saya ingin konsultasi tentang produk ${product.name}.`,
+                                                    )}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    <PhoneCall className="h-4 w-4" />
+                                                    Konsultasi
+                                                </a>
+                                            </Button>
+                                            <Button asChild size="sm">
+                                                <Link href={`/produk/${product.slug}`}>
+                                                    Lihat Detail
+                                                    <ArrowRight className="h-4 w-4" />
+                                                </Link>
+                                            </Button>
+                                        </div>
                                     </div>
-
-                                    <ul className="space-y-2 pt-1">
-                                        {product.features.slice(0, 2).map((feature) => (
-                                            <li key={feature} className="flex items-start gap-2 text-xs text-muted-foreground">
-                                                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
-                                                <span>{feature}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <div className="mt-auto grid grid-cols-1 gap-3 pt-2">
-                                        <Button asChild variant="outline" size="sm">
-                                            <a
-                                                href={getWhatsAppUrl(
-                                                    `Halo, saya ingin konsultasi tentang produk ${product.name}.`,
-                                                )}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                <PhoneCall className="h-4 w-4" />
-                                                Konsultasi
-                                            </a>
-                                        </Button>
-                                        <Button asChild size="sm">
-                                            <Link href={`/produk/${product.slug}`}>
-                                                Lihat Detail
-                                                <ArrowRight className="h-4 w-4" />
-                                            </Link>
-                                        </Button>
-                                    </div>
-                                </div>
-                            </article>
+                                </article>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </section>
             </main>
 

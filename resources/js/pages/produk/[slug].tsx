@@ -40,19 +40,15 @@ export default function ProductDetail({ product, otherProducts }: ProductDetailP
             <>
                 <Head title="Produk Tidak Ditemukan" />
                 <Navbar />
-                <div className="flex min-h-screen items-center justify-center">
-                    <div className="text-center">
-                        <h1 className="text-4xl font-bold text-foreground">
-                            404
-                        </h1>
-                        <p className="mt-2 text-muted-foreground">
-                            Produk tidak ditemukan.
-                        </p>
+                <main className="flex min-h-screen items-center justify-center px-4">
+                    <section className="text-center">
+                        <h1 className="text-4xl font-bold text-foreground">404</h1>
+                        <p className="mt-2 text-muted-foreground">Produk tidak ditemukan.</p>
                         <Button asChild className="mt-6">
                             <Link href="/">Kembali ke Beranda</Link>
                         </Button>
-                    </div>
-                </div>
+                    </section>
+                </main>
             </>
         );
     }
@@ -67,7 +63,7 @@ export default function ProductDetail({ product, otherProducts }: ProductDetailP
             <main className="bg-background pt-32 pb-16">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-28">
                     {/* Breadcrumb */}
-                    <nav className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
+                    <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
                         <Link
                             href="/"
                             className="transition-colors hover:text-foreground"
@@ -82,7 +78,7 @@ export default function ProductDetail({ product, otherProducts }: ProductDetailP
                             Produk
                         </Link>
                         <span>/</span>
-                        <span className="text-foreground">{product.name}</span>
+                        <span className="text-foreground" aria-current="page">{product.name}</span>
                     </nav>
 
                     {/* Hero Section */}
@@ -106,25 +102,26 @@ export default function ProductDetail({ product, otherProducts }: ProductDetailP
                             </div>
 
                             {/* Thumbnails */}
-                            <div className="grid grid-cols-4 gap-3">
+                            <ul className="grid grid-cols-4 gap-3">
                                 {galleryImages.map((img, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => setSelectedImage(index)}
-                                        className={`aspect-4/3 overflow-hidden rounded-xl border-2 transition-all duration-200 ${
-                                            selectedImage === index
-                                                ? 'border-primary shadow-md'
-                                                : 'border-border/50 opacity-60 hover:opacity-100'
-                                        }`}
-                                    >
-                                        <img
-                                            src={img}
-                                            alt={`Thumbnail ${index + 1}`}
-                                            className="h-full w-full object-cover"
-                                        />
-                                    </button>
+                                    <li key={index}>
+                                        <button
+                                            onClick={() => setSelectedImage(index)}
+                                            className={`aspect-4/3 overflow-hidden rounded-xl border-2 transition-all duration-200 ${
+                                                selectedImage === index
+                                                    ? 'border-primary shadow-md'
+                                                    : 'border-border/50 opacity-60 hover:opacity-100'
+                                            }`}
+                                        >
+                                            <img
+                                                src={img}
+                                                alt={`Thumbnail ${index + 1}`}
+                                                className="h-full w-full object-cover"
+                                            />
+                                        </button>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                         </div>
 
                         {/* Details */}
@@ -211,9 +208,9 @@ export default function ProductDetail({ product, otherProducts }: ProductDetailP
 
                     {/* Other Products */}
                     {otherProducts.length > 0 && (
-                        <div className="mt-20">
+                        <section className="mt-20" aria-labelledby="other-products-heading">
                             <div className="flex items-center justify-between">
-                                <h2 className="text-2xl font-bold text-foreground">
+                                <h2 id="other-products-heading" className="text-2xl font-bold text-foreground">
                                     Produk Lainnya
                                 </h2>
                                 <Button asChild variant="ghost">
@@ -223,36 +220,36 @@ export default function ProductDetail({ product, otherProducts }: ProductDetailP
                                     </Link>
                                 </Button>
                             </div>
-                            <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                            <ul className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                                 {otherProducts.map((p) => (
-                                    <Link
-                                        key={p.slug}
-                                        href={`/produk/${p.slug}`}
-                                        className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                                    >
-                                        <div className="relative h-40 overflow-hidden">
-                                            <img
-                                                src={p.image}
-                                                alt={p.name}
-                                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                            />
-                                            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
-                                        </div>
-                                        <div className="p-5">
-                                            <h3 className="truncate text-base font-bold text-foreground">
-                                                {p.name}
-                                            </h3>
-                                            <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
-                                                {p.description}
-                                            </p>
-                                            <p className="mt-3 text-lg font-bold text-primary">
-                                                {p.price}
-                                            </p>
-                                        </div>
-                                    </Link>
+                                    <li key={p.slug}>
+                                        <article className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                            <Link href={`/produk/${p.slug}`}>
+                                                <div className="relative h-40 overflow-hidden">
+                                                    <img
+                                                        src={p.image}
+                                                        alt={p.name}
+                                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    />
+                                                    <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
+                                                </div>
+                                                <div className="p-5">
+                                                    <h3 className="truncate text-base font-bold text-foreground">
+                                                        {p.name}
+                                                    </h3>
+                                                    <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                                                        {p.description}
+                                                    </p>
+                                                    <p className="mt-3 text-lg font-bold text-primary">
+                                                        {p.price}
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        </article>
+                                    </li>
                                 ))}
-                            </div>
-                        </div>
+                            </ul>
+                        </section>
                     )}
                 </div>
             </main>

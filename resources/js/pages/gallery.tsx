@@ -51,7 +51,10 @@ export default function GalleryPage({ items }: GalleryPageProps) {
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">
-                <section className="relative overflow-hidden border-y border-border/40 bg-muted/30 py-14 sm:py-16">
+                <section
+                    className="relative overflow-hidden border-y border-border/40 bg-muted/30 py-14 sm:py-16"
+                    aria-labelledby="gallery-page-heading"
+                >
                     <div className="pointer-events-none absolute -top-24 -right-20 h-72 w-72 rounded-full bg-primary/15 blur-[100px]" />
                     <div className="pointer-events-none absolute -bottom-28 -left-24 h-72 w-72 rounded-full bg-primary/10 blur-[100px]" />
 
@@ -62,7 +65,10 @@ export default function GalleryPage({ items }: GalleryPageProps) {
                                     <Images className="h-4 w-4" />
                                     Portofolio Proyek
                                 </Badge>
-                                <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl lg:leading-tight">
+                                <h1
+                                    id="gallery-page-heading"
+                                    className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl lg:leading-tight"
+                                >
                                     Gallery Hasil Produksi & Pemasangan
                                 </h1>
                                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -89,12 +95,20 @@ export default function GalleryPage({ items }: GalleryPageProps) {
                     </div>
                 </section>
 
-                <section className="container mx-auto px-4 pt-12 sm:px-6 lg:px-28">
-                    <div className="flex flex-wrap gap-3">
+                <section
+                    className="container mx-auto px-4 pt-12 sm:px-6 lg:px-28"
+                    aria-labelledby="gallery-list-heading"
+                >
+                    <h2 id="gallery-list-heading" className="sr-only">
+                        Daftar proyek galeri
+                    </h2>
+
+                    <nav className="flex flex-wrap gap-3" aria-label="Filter kategori galeri">
                         {galleryFilters.map((filter) => (
                             <button
                                 key={filter}
                                 onClick={() => setActiveFilter(filter)}
+                                aria-pressed={activeFilter === filter}
                                 className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 ${
                                     activeFilter === filter
                                         ? 'border-primary bg-primary text-foreground shadow-sm'
@@ -104,45 +118,47 @@ export default function GalleryPage({ items }: GalleryPageProps) {
                                 {filter}
                             </button>
                         ))}
-                    </div>
+                    </nav>
 
-                    <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <ul className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                         {filteredGallery.map((item) => (
-                            <article
-                                key={item.id}
-                                className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                            >
-                                <button
-                                    className="relative block h-60 w-full cursor-zoom-in overflow-hidden"
-                                    onClick={() => setSelectedImageId(item.id)}
-                                >
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent" />
-                                    <span className="absolute right-3 bottom-3 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white">
-                                        Klik untuk lihat
-                                    </span>
-                                </button>
+                            <li key={item.id}>
+                                <article className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                    <button
+                                        className="relative block h-60 w-full cursor-zoom-in overflow-hidden"
+                                        onClick={() => setSelectedImageId(item.id)}
+                                    >
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent" />
+                                        <span className="absolute right-3 bottom-3 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white">
+                                            Klik untuk lihat
+                                        </span>
+                                    </button>
 
-                                <div className="space-y-3 p-5">
-                                    <div className="flex items-center justify-between gap-3">
-                                        <Badge variant="outline">{item.category}</Badge>
-                                        <span className="text-xs text-muted-foreground">{item.location ?? '-'}</span>
+                                    <div className="space-y-3 p-5">
+                                        <div className="flex items-center justify-between gap-3">
+                                            <Badge variant="outline">{item.category}</Badge>
+                                            <span className="text-xs text-muted-foreground">{item.location ?? '-'}</span>
+                                        </div>
+                                        <h3 className="line-clamp-1 text-lg font-bold text-foreground">{item.title}</h3>
+                                        <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                                            {item.description}
+                                        </p>
                                     </div>
-                                    <h2 className="line-clamp-1 text-lg font-bold text-foreground">{item.title}</h2>
-                                    <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                                        {item.description}
-                                    </p>
-                                </div>
-                            </article>
+                                </article>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </section>
 
-                <section className="container mx-auto px-4 pt-16 sm:px-6 lg:px-28">
+                <section
+                    className="container mx-auto px-4 pt-16 sm:px-6 lg:px-28"
+                    aria-labelledby="gallery-cta-heading"
+                >
                     <div className="rounded-3xl border border-border/60 bg-muted/30 p-8 sm:p-10">
                         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
                             <div>
@@ -150,9 +166,12 @@ export default function GalleryPage({ items }: GalleryPageProps) {
                                     <Sparkles className="h-4 w-4" />
                                     Siap Mulai Proyek Anda?
                                 </Badge>
-                                <h3 className="mt-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                                <h2
+                                    id="gallery-cta-heading"
+                                    className="mt-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+                                >
                                     Ceritakan kebutuhan signage bisnis Anda kepada tim kami.
-                                </h3>
+                                </h2>
                                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                                     Kami bantu dari tahap konsep, desain visual, produksi, hingga pemasangan.
                                 </p>

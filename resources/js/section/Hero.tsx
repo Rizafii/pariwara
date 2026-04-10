@@ -11,7 +11,10 @@ const HERO_STATS = [
 
 export default function Hero() {
     return (
-        <section className="relative min-h-screen overflow-hidden bg-[#0f1117]">
+        <section
+            className="relative min-h-screen overflow-hidden bg-[#0f1117]"
+            aria-labelledby="hero-heading"
+        >
             {/* Background Pattern */}
             <div className="absolute inset-0 z-0">
                 {/* SVG Pattern Texture */}
@@ -64,7 +67,10 @@ export default function Hero() {
                     <div className="max-w-2xl space-y-6">
                         {/* Heading */}
                         <div className="">
-                            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl sm:leading-16 lg:text-6xl lg:leading-18">
+                            <h1
+                                id="hero-heading"
+                                className="text-4xl font-bold tracking-tight text-white sm:text-5xl sm:leading-16 lg:text-6xl lg:leading-18"
+                            >
                                 Wujudkan{' '}
                                 <span className="text-primary">
                                     Identitas Brand
@@ -101,18 +107,18 @@ export default function Hero() {
                         </div>
 
                         {/* Stats */}
-                        <div className="flex flex-wrap gap-8 sm:gap-12">
+                        <dl className="flex flex-wrap gap-8 sm:gap-12">
                             {HERO_STATS.map((stat) => (
                                 <div key={stat.label} className="space-y-1">
-                                    <p className="text-3xl font-bold text-primary">
-                                        {stat.value}
-                                    </p>
-                                    <p className="text-sm text-gray-400">
+                                    <dt className="text-sm text-gray-400">
                                         {stat.label}
-                                    </p>
+                                    </dt>
+                                    <dd className="text-3xl font-bold text-primary">
+                                        {stat.value}
+                                    </dd>
                                 </div>
                             ))}
-                        </div>
+                        </dl>
                     </div>
 
                     {/* Right Column - Hero Image */}

@@ -55,7 +55,10 @@ export default function AboutPage() {
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">
-                <section className="relative overflow-hidden border-y border-border/40 bg-[#0f1524] py-16 text-white sm:py-20">
+                <section
+                    className="relative overflow-hidden border-y border-border/40 bg-[#0f1524] py-16 text-white sm:py-20"
+                    aria-labelledby="about-page-heading"
+                >
                     <div className="pointer-events-none absolute -top-28 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/30 blur-[120px]" />
 
                     <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-28">
@@ -65,7 +68,7 @@ export default function AboutPage() {
                                     <Users className="h-4 w-4" />
                                     Profil Perusahaan
                                 </Badge>
-                                <h1 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                                <h1 id="about-page-heading" className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
                                     Tentang Kami
                                 </h1>
                                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200 sm:text-lg">
@@ -91,28 +94,37 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                <section className="container mx-auto px-4 pt-12 sm:px-6 lg:px-28">
-                    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+                <section
+                    className="container mx-auto px-4 pt-12 sm:px-6 lg:px-28"
+                    aria-labelledby="about-stats-heading"
+                >
+                    <h2 id="about-stats-heading" className="sr-only">
+                        Statistik perusahaan
+                    </h2>
+                    <dl className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                         {STATS.map((stat) => (
                             <div
                                 key={stat.label}
                                 className="rounded-2xl border border-border/60 bg-muted/30 p-5 text-center"
                             >
-                                <p className="text-3xl font-bold text-foreground">{stat.value}</p>
-                                <p className="mt-2 text-xs text-muted-foreground sm:text-sm">{stat.label}</p>
+                                <dt className="text-xs text-muted-foreground sm:text-sm">{stat.label}</dt>
+                                <dd className="mt-2 text-3xl font-bold text-foreground">{stat.value}</dd>
                             </div>
                         ))}
-                    </div>
+                    </dl>
                 </section>
 
-                <section className="container mx-auto px-4 pt-14 sm:px-6 lg:px-28">
+                <section
+                    className="container mx-auto px-4 pt-14 sm:px-6 lg:px-28"
+                    aria-labelledby="about-focus-heading"
+                >
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         <div className="rounded-2xl border border-border/60 bg-background p-7 shadow-xs">
                             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                                 <Target className="h-3.5 w-3.5" />
                                 Fokus Utama
                             </div>
-                            <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground">
+                            <h2 id="about-focus-heading" className="mt-4 text-2xl font-bold tracking-tight text-foreground">
                                 Dari Ide Sampai Terpasang di Lapangan
                             </h2>
                             <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -141,7 +153,10 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                <section className="container mx-auto px-4 pt-14 sm:px-6 lg:px-28">
+                <section
+                    className="container mx-auto px-4 pt-14 sm:px-6 lg:px-28"
+                    aria-labelledby="about-cta-heading"
+                >
                     <div className="rounded-3xl border border-border/60 bg-muted/30 p-8 sm:p-10">
                         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
                             <div>
@@ -149,7 +164,7 @@ export default function AboutPage() {
                                     <Award className="h-4 w-4" />
                                     Mari Berkolaborasi
                                 </Badge>
-                                <h2 className="mt-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                                <h2 id="about-cta-heading" className="mt-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                                     Siap mengembangkan identitas visual bisnis Anda?
                                 </h2>
                                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">

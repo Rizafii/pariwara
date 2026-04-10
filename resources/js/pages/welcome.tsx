@@ -86,14 +86,16 @@ export default function Welcome({
                 />
             </Head>
             <Navbar transparent />
-            <Hero />
-            <Clients clients={clients} />
-            <Services services={services} />
-            <Workflow />
-            <Products products={products} />
-            <Gallery items={galleryItems} />
-            <Articles articles={articleItems} />
-            <FinalCta />
+            <main>
+                <Hero />
+                <Clients clients={clients} />
+                <Services services={services} />
+                <Workflow />
+                <Products products={products} />
+                <Gallery items={galleryItems} />
+                <Articles articles={articleItems} />
+                <FinalCta />
+            </main>
             <Whatsapp />
         </>
     );

@@ -9,7 +9,10 @@ const CONSULTATION_URL =
 
 export default function FinalCta() {
     return (
-        <section className="relative overflow-hidden bg-[#0d1220] py-20">
+        <section
+            className="relative overflow-hidden bg-[#0d1220] py-20"
+            aria-labelledby="final-cta-heading"
+        >
             <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/25 blur-[110px]" />
             <div className="pointer-events-none absolute right-0 bottom-0 h-72 w-72 rounded-full bg-cyan-400/15 blur-[110px]" />
 
@@ -21,7 +24,10 @@ export default function FinalCta() {
                                 <Sparkles className="h-4 w-4" />
                                 Siap Naik Kelas
                             </Badge>
-                            <h2 className="mt-5 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+                            <h2
+                                id="final-cta-heading"
+                                className="mt-5 max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl"
+                            >
                                 Mari wujudkan signage yang bikin brand Anda langsung dikenali.
                             </h2>
                             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">

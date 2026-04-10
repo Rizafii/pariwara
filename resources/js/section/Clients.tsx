@@ -9,12 +9,18 @@ interface ClientItem {
 
 export default function Clients({ clients = [] }: { clients?: ClientItem[] }) {
     return (
-        <section className="bg-background py-16 sm:py-20">
+        <section
+            className="bg-background py-16 sm:py-20"
+            aria-labelledby="clients-heading"
+        >
             <div className="container mx-auto px-4 sm:px-6 lg:px-28">
                 {/* Header */}
                 <div className="text-center">
                     <Badge>Dipercaya Oleh</Badge>
-                    <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                    <h2
+                        id="clients-heading"
+                        className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+                    >
                         Brand & Klien Kami
                     </h2>
                     <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
@@ -24,9 +30,9 @@ export default function Clients({ clients = [] }: { clients?: ClientItem[] }) {
                 </div>
 
                 {/* Logo Grid */}
-                <div className="mt-12 grid grid-cols-2 items-center gap-8 sm:grid-cols-3 md:grid-cols-4">
+                <ul className="mt-12 grid grid-cols-2 items-center gap-8 sm:grid-cols-3 md:grid-cols-4">
                     {clients.map((brand) => (
-                        <div
+                        <li
                             key={brand.id}
                             className="flex items-center justify-center transition-all duration-300 "
                         >
@@ -49,9 +55,9 @@ export default function Clients({ clients = [] }: { clients?: ClientItem[] }) {
                                     className="h-10 w-auto max-w-35 object-contain"
                                 />
                             )}
-                        </div>
+                        </li>
                     ))}
-                </div>
+                </ul>
             </div>
         </section>
     );

@@ -59,7 +59,10 @@ export default function ArtikelPage({ articles }: ArtikelPageProps) {
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">
-                <section className="relative overflow-hidden border-y border-border/40 bg-muted/30 py-14 sm:py-16">
+                <section
+                    className="relative overflow-hidden border-y border-border/40 bg-muted/30 py-14 sm:py-16"
+                    aria-labelledby="articles-page-heading"
+                >
                     <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-primary/12 blur-[120px]" />
 
                     <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-28">
@@ -67,7 +70,10 @@ export default function ArtikelPage({ articles }: ArtikelPageProps) {
                             <BookOpen className="h-4 w-4" />
                             Insight & Edukasi Visual Branding
                         </Badge>
-                        <h1 className="mt-4 max-w-4xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                        <h1
+                            id="articles-page-heading"
+                            className="mt-4 max-w-4xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+                        >
                             Artikel Seputar Signage, Reklame, dan Strategi Brand Presence
                         </h1>
                         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -77,7 +83,13 @@ export default function ArtikelPage({ articles }: ArtikelPageProps) {
                     </div>
                 </section>
 
-                <section className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28">
+                <section
+                    className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28"
+                    aria-labelledby="articles-filter-heading"
+                >
+                    <h2 id="articles-filter-heading" className="sr-only">
+                        Pencarian dan filter artikel
+                    </h2>
                     <div className="grid grid-cols-1 gap-4 rounded-2xl border border-border/60 bg-background p-4 shadow-xs md:grid-cols-[1fr_auto] md:items-center md:p-5">
                         <div className="relative">
                             <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -89,11 +101,12 @@ export default function ArtikelPage({ articles }: ArtikelPageProps) {
                             />
                         </div>
 
-                        <div className="flex flex-wrap gap-2 md:justify-end">
+                        <nav className="flex flex-wrap gap-2 md:justify-end" aria-label="Filter kategori artikel">
                             {articleCategories.map((category) => (
                                 <button
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
+                                    aria-pressed={activeCategory === category}
                                     className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 ${
                                         activeCategory === category
                                             ? 'border-primary bg-primary text-foreground'
@@ -103,11 +116,17 @@ export default function ArtikelPage({ articles }: ArtikelPageProps) {
                                     {category}
                                 </button>
                             ))}
-                        </div>
+                        </nav>
                     </div>
                 </section>
 
-                <section className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28">
+                <section
+                    className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28"
+                    aria-labelledby="articles-results-heading"
+                >
+                    <h2 id="articles-results-heading" className="sr-only">
+                        Hasil artikel
+                    </h2>
                     {featuredArticle ? (
                         <article className="group overflow-hidden rounded-3xl border border-border/60 bg-background shadow-sm">
                             <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr]">
@@ -136,7 +155,7 @@ export default function ArtikelPage({ articles }: ArtikelPageProps) {
 
                                     <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                                         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground sm:text-sm">
-                                            <span>{featuredArticle.date ?? '-'}</span>
+                                            <time>{featuredArticle.date ?? '-'}</time>
                                             <span className="inline-flex items-center gap-1">
                                                 <Clock3 className="h-4 w-4" />
                                                 {featuredArticle.readTime ?? '-'}
@@ -163,49 +182,48 @@ export default function ArtikelPage({ articles }: ArtikelPageProps) {
                     )}
 
                     {otherArticles.length > 0 && (
-                        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             {otherArticles.map((article) => (
-                                <article
-                                    key={article.slug}
-                                    className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                                >
-                                    <Link href={`/artikel/${article.slug}`} className="relative block h-56 overflow-hidden">
-                                        <img
-                                            src={article.image ?? 'https://placehold.co/1200x760/111d2f/f8fafc?text=Artikel'}
-                                            alt={article.title}
-                                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                        />
-                                        <div className="absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent" />
-                                    </Link>
+                                <li key={article.slug}>
+                                    <article className="group overflow-hidden rounded-2xl border border-border/50 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                        <Link href={`/artikel/${article.slug}`} className="relative block h-56 overflow-hidden">
+                                            <img
+                                                src={article.image ?? 'https://placehold.co/1200x760/111d2f/f8fafc?text=Artikel'}
+                                                alt={article.title}
+                                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent" />
+                                        </Link>
 
-                                    <div className="space-y-4 p-5">
-                                        <div className="flex items-center justify-between gap-2">
-                                            <Badge variant="outline">{article.category ?? 'Artikel'}</Badge>
-                                            <span className="text-xs text-muted-foreground">{article.readTime ?? '-'}</span>
+                                        <div className="space-y-4 p-5">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <Badge variant="outline">{article.category ?? 'Artikel'}</Badge>
+                                                <span className="text-xs text-muted-foreground">{article.readTime ?? '-'}</span>
+                                            </div>
+
+                                            <h3 className="line-clamp-2 text-lg font-bold leading-tight text-foreground">
+                                                {article.title}
+                                            </h3>
+                                            <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                                                {article.excerpt}
+                                            </p>
+
+                                            <div className="flex items-center justify-between border-t border-border/60 pt-4 text-xs text-muted-foreground">
+                                                <time>{article.date ?? '-'}</time>
+                                                <span>{article.author ?? '-'}</span>
+                                            </div>
+
+                                            <Button asChild variant="ghost" className="w-full justify-between">
+                                                <Link href={`/artikel/${article.slug}`}>
+                                                    Lanjut Baca
+                                                    <ArrowRight className="h-4 w-4" />
+                                                </Link>
+                                            </Button>
                                         </div>
-
-                                        <h3 className="line-clamp-2 text-lg font-bold leading-tight text-foreground">
-                                            {article.title}
-                                        </h3>
-                                        <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                                            {article.excerpt}
-                                        </p>
-
-                                        <div className="flex items-center justify-between border-t border-border/60 pt-4 text-xs text-muted-foreground">
-                                            <span>{article.date ?? '-'}</span>
-                                            <span>{article.author ?? '-'}</span>
-                                        </div>
-
-                                        <Button asChild variant="ghost" className="w-full justify-between">
-                                            <Link href={`/artikel/${article.slug}`}>
-                                                Lanjut Baca
-                                                <ArrowRight className="h-4 w-4" />
-                                            </Link>
-                                        </Button>
-                                    </div>
-                                </article>
+                                    </article>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     )}
                 </section>
             </main>

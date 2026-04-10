@@ -15,7 +15,11 @@ interface GalleryItem {
 
 export default function Gallery({ items = [] }: { items?: GalleryItem[] }) {
     return (
-        <section id="gallery" className="relative overflow-hidden bg-[#101522] py-16 sm:py-20">
+        <section
+            id="gallery"
+            className="relative overflow-hidden bg-[#101522] py-16 sm:py-20"
+            aria-labelledby="gallery-heading"
+        >
             <div className="pointer-events-none absolute -top-28 -left-24 h-72 w-72 rounded-full bg-primary/25 blur-[100px]" />
             <div className="pointer-events-none absolute -right-28 bottom-4 h-72 w-72 rounded-full bg-cyan-400/10 blur-[100px]" />
 
@@ -26,7 +30,10 @@ export default function Gallery({ items = [] }: { items?: GalleryItem[] }) {
                             <Camera className="h-4 w-4" />
                             Sorotan Proyek
                         </Badge>
-                        <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                        <h2
+                            id="gallery-heading"
+                            className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                        >
                             Gallery Pekerjaan Kami
                         </h2>
                     </div>
@@ -36,33 +43,33 @@ export default function Gallery({ items = [] }: { items?: GalleryItem[] }) {
                     </p>
                 </div>
 
-                <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <ul className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                     {items.map((item) => (
-                        <Link
-                            key={item.id}
-                            href="/gallery"
-                            className="group relative block overflow-hidden rounded-2xl border border-white/10"
-                        >
-                            <div className="relative h-60 overflow-hidden">
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/15 to-transparent" />
-                            </div>
+                        <li key={item.id}>
+                            <article className="group relative overflow-hidden rounded-2xl border border-white/10">
+                                <Link href="/gallery" className="block">
+                                    <div className="relative h-60 overflow-hidden">
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/15 to-transparent" />
+                                    </div>
 
-                            <div className="absolute top-4 left-4 rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs text-white/90 backdrop-blur-sm">
-                                {item.category}
-                            </div>
+                                    <div className="absolute top-4 left-4 rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs text-white/90 backdrop-blur-sm">
+                                        {item.category}
+                                    </div>
 
-                            <div className="absolute right-0 bottom-0 left-0 p-5">
-                                <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-                                <p className="mt-1 text-xs text-white/80">{item.location ?? 'Lokasi proyek'}</p>
-                            </div>
-                        </Link>
+                                    <div className="absolute right-0 bottom-0 left-0 p-5">
+                                        <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                                        <p className="mt-1 text-xs text-white/80">{item.location ?? 'Lokasi proyek'}</p>
+                                    </div>
+                                </Link>
+                            </article>
+                        </li>
                     ))}
-                </div>
+                </ul>
 
                 <div className="mt-8 flex justify-center">
                     <Button asChild size="lg" className="bg-primary text-foreground hover:bg-primary/90">

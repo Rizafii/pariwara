@@ -34,7 +34,10 @@ export default function ServicesPage({ services }: ServicesPageProps) {
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">
-                <section className="relative overflow-hidden border-y border-border/40 bg-muted/30 py-14 sm:py-16">
+                <section
+                    className="relative overflow-hidden border-y border-border/40 bg-muted/30 py-14 sm:py-16"
+                    aria-labelledby="services-page-heading"
+                >
                     <div className="pointer-events-none absolute -top-28 right-6 h-72 w-72 rounded-full bg-primary/15 blur-[100px]" />
                     <div className="pointer-events-none absolute -bottom-28 left-4 h-72 w-72 rounded-full bg-primary/10 blur-[100px]" />
 
@@ -45,7 +48,10 @@ export default function ServicesPage({ services }: ServicesPageProps) {
                                     <Sparkles className="h-4 w-4" />
                                     Solusi Lengkap Pariwara
                                 </Badge>
-                                <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                                <h1
+                                    id="services-page-heading"
+                                    className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+                                >
                                     Layanan Signage, Reklame, dan Branding
                                 </h1>
                                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -72,64 +78,69 @@ export default function ServicesPage({ services }: ServicesPageProps) {
                     </div>
                 </section>
 
-                <section className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28">
-                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <section
+                    className="container mx-auto px-4 pt-10 sm:px-6 lg:px-28"
+                    aria-labelledby="services-list-heading"
+                >
+                    <h2 id="services-list-heading" className="sr-only">
+                        Daftar layanan
+                    </h2>
+                    <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                         {services.map((service) => (
-                            <article
-                                key={service.slug}
-                                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                            >
-                                <Link href={`/layanan/${service.slug}`} className="relative block h-56 overflow-hidden">
-                                    <img
-                                        src={service.image}
-                                        alt={service.title}
-                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-linear-to-t from-black/45 to-transparent" />
-                                </Link>
+                            <li key={service.slug}>
+                                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                    <Link href={`/layanan/${service.slug}`} className="relative block h-56 overflow-hidden">
+                                        <img
+                                            src={service.image}
+                                            alt={service.title}
+                                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-linear-to-t from-black/45 to-transparent" />
+                                    </Link>
 
-                                <div className="flex flex-1 flex-col gap-4 p-6">
-                                    <h2 className="line-clamp-2 text-xl font-bold text-foreground">{service.title}</h2>
-                                    <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                                        {service.description}
-                                    </p>
+                                    <div className="flex flex-1 flex-col gap-4 p-6">
+                                        <h3 className="line-clamp-2 text-xl font-bold text-foreground">{service.title}</h3>
+                                        <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                                            {service.description}
+                                        </p>
 
-                                    <ul className="grid grid-cols-1 gap-2 pt-1">
-                                        {service.features.slice(0, 3).map((feature) => (
-                                            <li
-                                                key={feature}
-                                                className="flex items-start gap-2 text-xs text-muted-foreground"
-                                            >
-                                                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
-                                                <span>{feature}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                        <ul className="grid grid-cols-1 gap-2 pt-1">
+                                            {service.features.slice(0, 3).map((feature) => (
+                                                <li
+                                                    key={feature}
+                                                    className="flex items-start gap-2 text-xs text-muted-foreground"
+                                                >
+                                                    <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                                                    <span>{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
 
-                                    <div className="mt-auto grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
-                                        <Button asChild variant="outline" size="sm">
-                                            <a
-                                                href={getWhatsAppUrl(
-                                                    `Halo, saya ingin konsultasi tentang layanan ${service.title}.`,
-                                                )}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                <PhoneCall className="h-4 w-4" />
-                                                Konsultasi
-                                            </a>
-                                        </Button>
-                                        <Button asChild size="sm">
-                                            <Link href={`/layanan/${service.slug}`}>
-                                                Detail
-                                                <ArrowRight className="h-4 w-4" />
-                                            </Link>
-                                        </Button>
+                                        <div className="mt-auto grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
+                                            <Button asChild variant="outline" size="sm">
+                                                <a
+                                                    href={getWhatsAppUrl(
+                                                        `Halo, saya ingin konsultasi tentang layanan ${service.title}.`,
+                                                    )}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    <PhoneCall className="h-4 w-4" />
+                                                    Konsultasi
+                                                </a>
+                                            </Button>
+                                            <Button asChild size="sm">
+                                                <Link href={`/layanan/${service.slug}`}>
+                                                    Detail
+                                                    <ArrowRight className="h-4 w-4" />
+                                                </Link>
+                                            </Button>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
+                                </article>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </section>
             </main>
 

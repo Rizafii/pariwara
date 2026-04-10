@@ -56,12 +56,18 @@ const STEPS = [
 
 export default function Workflow() {
     return (
-        <section className="bg-background py-16 sm:py-20">
+        <section
+            className="bg-background py-16 sm:py-20"
+            aria-labelledby="workflow-heading"
+        >
             <div className="container mx-auto px-4 sm:px-6 lg:px-28">
                 {/* Header */}
                 <div className="text-center">
                     <Badge>Proses Kerja Kami</Badge>
-                    <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                    <h2
+                        id="workflow-heading"
+                        className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+                    >
                         Flow Pengerjaan
                     </h2>
                     <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
@@ -71,9 +77,9 @@ export default function Workflow() {
                 </div>
 
                 {/* Steps */}
-                <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <ol className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                     {STEPS.map((item, index) => (
-                        <div
+                        <li
                             key={item.step}
                             className="group relative rounded-2xl border border-border/50 bg-muted/20 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
                         >
@@ -99,9 +105,9 @@ export default function Workflow() {
                             {index < STEPS.length - 1 && (
                                 <div className="absolute top-1/2 -right-4 hidden h-px w-8 bg-border lg:block" />
                             )}
-                        </div>
+                        </li>
                     ))}
-                </div>
+                </ol>
             </div>
         </section>
     );
