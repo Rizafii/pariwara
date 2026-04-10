@@ -92,7 +92,9 @@ export default function SiteFooter() {
                         <ul className="mt-4 space-y-3 text-sm text-slate-300">
                             <li className="flex items-start gap-2">
                                 <MapPin className="mt-0.5 h-4 w-4 text-primary" />
-                                <span>Malang, Jawa Timur</span>
+                                <a href='https://maps.app.goo.gl/zLfPqEhTLyH64DT96'
+                                    target="_blank"
+                                    rel="noopener noreferrer">Malang, Jawa Timur</a>
                             </li>
                             <li className="flex items-start gap-2">
                                 <Phone className="mt-0.5 h-4 w-4 text-primary" />
@@ -103,10 +105,10 @@ export default function SiteFooter() {
                             <li className="flex items-start gap-2">
                                 <Mail className="mt-0.5 h-4 w-4 text-primary" />
                                 <a
-                                    href="mailto:halo@pariwara.id"
+                                    href="mailto:support@neonsignmalang.com"
                                     className="transition-colors hover:text-primary"
                                 >
-                                    halo@pariwara.id
+                                    halo@neonsignmalang.com
                                 </a>
                             </li>
                             <li className="flex items-start gap-2">
