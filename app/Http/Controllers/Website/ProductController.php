@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Concerns\BuildsSeoMeta;
 use App\Http\Controllers\Concerns\InteractsWithMedia;
 use App\Http\Controllers\Controller;
 use App\Models\GalleryItem;
 use App\Models\Product;
+use App\Support\Seo;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class ProductController extends Controller
 {
-    use BuildsSeoMeta;
     use InteractsWithMedia;
 
     public function index(): Response
@@ -31,18 +30,14 @@ class ProductController extends Controller
 
         return Inertia::render('produk/index', [
             'products' => $products,
-            'meta' => $this->buildSeoMeta([
+        ])->withViewData(Seo::make([
                 'title' => 'Produk Neon Sign & Signage Malang | Orion\'s Melody',
                 'description' => 'Katalog produk neon sign, signage, dan media branding usaha untuk area Malang dan Jawa Timur.',
-                'keywords' => [
-                    'produk neon sign malang',
-                    'signage malang',
-                    'branding usaha malang',
-                ],
+                'keywords' => 'produk neon sign malang, signage malang, branding usaha malang',
                 'image' => $metaImage,
                 'url' => route('produk.index'),
-            ]),
-        ]);
+                'canonical' => route('produk.index'),
+            ]));
     }
 
     public function show(string $slug): Response
@@ -73,18 +68,15 @@ class ProductController extends Controller
             'slug' => $slug,
             'product' => $this->transformProduct($product),
             'otherProducts' => $otherProducts,
-            'meta' => $this->buildSeoMeta([
+        ])->withViewData(Seo::make([
                 'title' => $product->name.' - Neon Sign Malang',
-                'description' => $this->excerptFromHtml($product->description, 160),
-                'keywords' => [
-                    $product->name,
-                    'neon sign malang',
-                    'custom neon',
-                ],
+                'description' => Seo::excerpt($product->description, 160),
+                'keywords' => $product->name.', neon sign malang, custom neon',
                 'image' => $metaImage,
                 'url' => route('produk.show', ['slug' => $slug]),
-            ]),
-        ]);
+                'canonical' => route('produk.show', ['slug' => $slug]),
+                'og_type' => 'article',
+            ]));
     }
 
     private function transformProduct(Product $product): array

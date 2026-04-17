@@ -91,10 +91,14 @@ export default function Hero() {
                                 size="lg"
                                 className="bg-primary px-8 text-base font-semibold text-foreground transition-all hover:bg-primary/80"
                             >
-                                <Link href="/kontak">
+                                <a
+                                    href="https://wa.me/628123394055"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
                                     Konsultasi Gratis
                                     <ArrowRight className="ml-2 h-5 w-5" />
-                                </Link>
+                                </a>
                             </Button>
                             <Button
                                 asChild

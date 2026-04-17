@@ -98,7 +98,7 @@ export default function SiteFooter() {
                             </li>
                             <li className="flex items-start gap-2">
                                 <Phone className="mt-0.5 h-4 w-4 text-primary" />
-                                <a href="tel:+6285136816957" className="transition-colors hover:text-primary">
+                                <a href="tel:+628123394055" className="transition-colors hover:text-primary">
                                     +62 851-3681-6957
                                 </a>
                             </li>
@@ -108,13 +108,13 @@ export default function SiteFooter() {
                                     href="mailto:support@neonsignmalang.com"
                                     className="transition-colors hover:text-primary"
                                 >
-                                    halo@neonsignmalang.com
+                                     infoneonsign@gmail.com
                                 </a>
                             </li>
                             <li className="flex items-start gap-2">
                                 <MessageCircleMore className="mt-0.5 h-4 w-4 text-primary" />
                                 <a
-                                    href="https://wa.me/6285136816957"
+                                    href="https://wa.me/628123394055"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="transition-colors hover:text-primary"
@@ -136,7 +136,7 @@ export default function SiteFooter() {
                             Insight
                         </Link>
                         <a
-                            href="https://wa.me/6285136816957"
+                            href="https://wa.me/628123394055"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="transition-colors hover:text-primary"

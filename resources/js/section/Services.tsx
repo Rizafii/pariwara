@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
-const WA_NUMBER = '6285136816957';
+const WA_NUMBER = '628123394055';
 
 interface ServiceItem {
     id: number;

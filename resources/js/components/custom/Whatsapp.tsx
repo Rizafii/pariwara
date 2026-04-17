@@ -2,7 +2,7 @@ export default function Whatsapp() {
     return (
         <div className="fixed right-4 bottom-4 z-50 lg:right-12 lg:bottom-12">
             <a
-                href="https://wa.me/6285136816957"
+                href="https://wa.me/628123394055"
                 target="_blank"
                 rel="noopener noreferrer"
             >

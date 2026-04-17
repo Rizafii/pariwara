@@ -4,8 +4,6 @@ import { useMemo, useState } from 'react';
 
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
-import SeoHead from '@/components/seo/seo-head';
-import type { SeoMeta } from '@/components/seo/seo-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,10 +22,9 @@ type Article = {
 
 interface ArtikelPageProps {
     articles: Article[];
-    meta: SeoMeta;
 }
 
-export default function ArtikelPage({ articles, meta }: ArtikelPageProps) {
+export default function ArtikelPage({ articles }: ArtikelPageProps) {
     const [query, setQuery] = useState('');
     const [activeCategory, setActiveCategory] = useState('Semua');
 
@@ -58,7 +55,6 @@ export default function ArtikelPage({ articles, meta }: ArtikelPageProps) {
 
     return (
         <>
-            <SeoHead meta={meta} />
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">

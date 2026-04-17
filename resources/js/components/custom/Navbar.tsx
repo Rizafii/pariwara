@@ -24,8 +24,10 @@ const NAV_LINKS = [
 
 const NAV_CTA = {
     label: 'Hubungi Kami',
-    href: 'https://wa.me/6285136816957',
+    href: 'https://wa.me/628123394055',
 };
+
+const isExternalCtaHref = /^(https?:)?\/\//.test(NAV_CTA.href);
 
 interface NavbarProps {
     transparent?: boolean;
@@ -104,10 +106,19 @@ export default function Navbar({ transparent = false }: NavbarProps) {
                 {/* Desktop CTA */}
                 <div className="hidden md:flex md:items-center">
                     <Button asChild>
-                        <Link href={NAV_CTA.href}>
-                            <Phone />
-                            {NAV_CTA.label}
-                        </Link>
+                        {isExternalCtaHref ? (
+                            <a href={NAV_CTA.href} target="_blank"
+                            rel="noopener noreferrer">
+                                <Phone />
+                                {NAV_CTA.label}
+                            </a>
+                        ) : (
+                            <Link href={NAV_CTA.href} target="_blank"
+                            rel="noopener noreferrer">
+                                <Phone />
+                                {NAV_CTA.label}
+                            </Link>
+                        )}
                     </Button>
                 </div>
 
@@ -156,10 +167,19 @@ export default function Navbar({ transparent = false }: NavbarProps) {
                                 <div className="mt-5 border-t border-border/70 pt-5">
                                     <SheetClose asChild>
                                         <Button asChild className="h-11 w-full">
-                                            <Link href={NAV_CTA.href}>
-                                                <Phone className="h-4 w-4" />
-                                                {NAV_CTA.label}
-                                            </Link>
+                                            {isExternalCtaHref ? (
+                                                <a href={NAV_CTA.href} target="_blank"
+                            rel="noopener noreferrer">
+                                                    <Phone className="h-4 w-4" />
+                                                    {NAV_CTA.label}
+                                                </a>
+                                            ) : (
+                                                <Link href={NAV_CTA.href} target="_blank"
+                            rel="noopener noreferrer">
+                                                    <Phone className="h-4 w-4" />
+                                                    {NAV_CTA.label}
+                                                </Link>
+                                            )}
                                         </Button>
                                     </SheetClose>
                                     <p className="text-muted-foreground mt-3 px-1 text-xs leading-relaxed">

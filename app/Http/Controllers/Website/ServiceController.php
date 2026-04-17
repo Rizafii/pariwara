@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Concerns\BuildsSeoMeta;
 use App\Http\Controllers\Concerns\InteractsWithMedia;
 use App\Http\Controllers\Controller;
 use App\Models\GalleryItem;
 use App\Models\Service;
+use App\Support\Seo;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class ServiceController extends Controller
 {
-    use BuildsSeoMeta;
     use InteractsWithMedia;
 
     public function index(): Response
@@ -31,18 +30,14 @@ class ServiceController extends Controller
 
         return Inertia::render('layanan/index', [
             'services' => $services,
-            'meta' => $this->buildSeoMeta([
+        ])->withViewData(Seo::make([
                 'title' => 'Layanan Neon Sign & Branding Usaha | Malang',
                 'description' => 'Layanan desain, produksi, dan pemasangan neon sign serta signage untuk bisnis di Malang dan Jawa Timur.',
-                'keywords' => [
-                    'layanan neon sign malang',
-                    'jasa signage malang',
-                    'branding usaha malang',
-                ],
+                'keywords' => 'layanan neon sign malang, jasa signage malang, branding usaha malang',
                 'image' => $metaImage,
                 'url' => route('layanan.index'),
-            ]),
-        ]);
+                'canonical' => route('layanan.index'),
+            ]));
     }
 
     public function show(string $slug): Response
@@ -73,18 +68,15 @@ class ServiceController extends Controller
             'slug' => $slug,
             'service' => $this->transformService($service),
             'otherServices' => $otherServices,
-            'meta' => $this->buildSeoMeta([
+        ])->withViewData(Seo::make([
                 'title' => $service->title.' - Neon Sign Malang',
-                'description' => $this->excerptFromHtml($service->description, 160),
-                'keywords' => [
-                    $service->title,
-                    'neon sign malang',
-                    'signage malang',
-                ],
+                'description' => Seo::excerpt($service->description, 160),
+                'keywords' => $service->title.', neon sign malang, signage malang',
                 'image' => $metaImage,
                 'url' => route('layanan.show', ['slug' => $slug]),
-            ]),
-        ]);
+                'canonical' => route('layanan.show', ['slug' => $slug]),
+                'og_type' => 'article',
+            ]));
     }
 
     private function transformService(Service $service): array

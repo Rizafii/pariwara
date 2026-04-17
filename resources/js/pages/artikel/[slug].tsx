@@ -3,14 +3,11 @@ import { ArrowLeft, ArrowRight, Clock3, Share2 } from 'lucide-react';
 
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
-import SeoHead from '@/components/seo/seo-head';
-import type { SeoMeta } from '@/components/seo/seo-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 interface ArtikelDetailProps {
     slug: string;
-    meta: SeoMeta;
     article: {
         id: number;
         slug: string;
@@ -33,20 +30,11 @@ interface ArtikelDetailProps {
     }>;
 }
 
-export default function ArtikelDetailPage({ article, relatedArticles, meta }: ArtikelDetailProps) {
+export default function ArtikelDetailPage({ article, relatedArticles }: ArtikelDetailProps) {
 
     if (!article) {
         return (
             <>
-                <SeoHead
-                    meta={{
-                        title: 'Artikel Tidak Ditemukan | CV. PARIWARA SATU SAE',
-                        description: 'Artikel yang Anda cari tidak tersedia atau sudah dipindahkan.',
-                        keywords: 'artikel neon sign malang, branding usaha malang',
-                        image: meta.image,
-                        url: meta.url,
-                    }}
-                />
                 <Navbar />
                 <main className="flex min-h-screen items-center justify-center px-4">
                     <div className="max-w-lg rounded-2xl border border-border/70 p-8 text-center">
@@ -65,7 +53,6 @@ export default function ArtikelDetailPage({ article, relatedArticles, meta }: Ar
 
     return (
         <>
-            <SeoHead meta={meta} />
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">
@@ -145,7 +132,7 @@ export default function ArtikelDetailPage({ article, relatedArticles, meta }: Ar
                                     Simpan atau bagikan insight ini ke tim Anda sebagai referensi proyek berikutnya.
                                 </p>
                                 <Button asChild variant="outline" className="mt-4 w-full">
-                                    <a href="https://wa.me/6285136816957" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://wa.me/628123394055" target="_blank" rel="noopener noreferrer">
                                         <Share2 className="h-4 w-4" />
                                         Bagikan via WhatsApp
                                     </a>
@@ -163,7 +150,7 @@ export default function ArtikelDetailPage({ article, relatedArticles, meta }: Ar
                                     Tim kami siap bantu merekomendasikan desain dan material yang paling cocok.
                                 </p>
                                 <Button asChild className="mt-4 w-full">
-                                    <a href="https://wa.me/6285136816957" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://wa.me/628123394055" target="_blank" rel="noopener noreferrer">
                                         Konsultasi Gratis
                                         <ArrowRight className="h-4 w-4" />
                                     </a>

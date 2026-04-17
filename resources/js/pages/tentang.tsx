@@ -12,7 +12,6 @@ import {
 
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
-import SeoHead from '@/components/seo/seo-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -47,22 +46,11 @@ const STATS = [
 ];
 
 const CONSULTATION_URL =
-    'https://wa.me/6285136816957?text=Halo,%20saya%20ingin%20konsultasi%20kebutuhan%20signage%20dan%20branding.';
+    'https://wa.me/628123394055?text=Halo,%20saya%20ingin%20konsultasi%20kebutuhan%20signage%20dan%20branding.';
 
 export default function AboutPage() {
     return (
         <>
-            <SeoHead
-                meta={{
-                    title: 'Tentang Kami | CV. PARIWARA SATU SAE',
-                    description:
-                        'Profil CV. Pariwara Satu Sae, mitra signage dan neon sign untuk branding usaha di Malang, Jawa Timur.',
-                    keywords:
-                        'tentang neon sign malang, profil branding usaha malang, signage jawa timur',
-                    image: '/logo/logo.webp',
-                    url: '/tentang',
-                }}
-            />
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">

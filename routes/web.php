@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\GalleryItemController as AdminGalleryItemControll
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Website\ArticleController;
+use App\Http\Controllers\Website\AboutController;
+use App\Http\Controllers\Website\ContactController;
 use App\Http\Controllers\Website\GalleryController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\ProductController;
@@ -24,7 +26,8 @@ Route::get('/layanan', [ServiceController::class, 'index'])->name('layanan.index
 
 Route::get('/produk', [ProductController::class, 'index'])->name('produk.index');
 
-Route::inertia('/tentang', 'tentang')->name('tentang');
+Route::get('/tentang', AboutController::class)->name('tentang');
+Route::get('/kontak', ContactController::class)->name('kontak');
 
 Route::redirect('/tentang-kami', '/tentang', 301);
 

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Concerns\BuildsSeoMeta;
 use App\Http\Controllers\Concerns\InteractsWithMedia;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\GalleryItem;
+use App\Support\Seo;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class ArticleController extends Controller
 {
-    use BuildsSeoMeta;
     use InteractsWithMedia;
 
     public function index(): Response
@@ -32,17 +31,14 @@ class ArticleController extends Controller
 
         return Inertia::render('artikel', [
             'articles' => $articles,
-            'meta' => $this->buildSeoMeta([
+        ])->withViewData(Seo::make([
                 'title' => 'Artikel Neon Sign & Branding Usaha | Malang',
                 'description' => 'Tips dan inspirasi neon sign untuk bisnis di Malang.',
-                'keywords' => [
-                    'artikel neon sign malang',
-                    'branding usaha malang',
-                ],
+                'keywords' => 'artikel neon sign malang, branding usaha malang',
                 'image' => $metaImage,
                 'url' => route('artikel.index'),
-            ]),
-        ]);
+                'canonical' => route('artikel.index'),
+            ]));
     }
 
     public function show(string $slug): Response
@@ -63,10 +59,10 @@ class ArticleController extends Controller
             ->get()
             ->map(fn (Article $item) => $this->transformArticle($item, false));
 
-        $description = $this->excerptFromHtml($article->content, 150);
+        $description = Seo::excerpt($article->content, 150);
 
         if ($description === '') {
-            $description = $this->excerptFromHtml($article->excerpt, 150);
+            $description = Seo::excerpt($article->excerpt, 150);
         }
 
         $metaImage = $this->toPublicUrl($article->image)
@@ -78,18 +74,15 @@ class ArticleController extends Controller
             'slug' => $slug,
             'article' => $this->transformArticle($article, true),
             'relatedArticles' => $relatedArticles,
-            'meta' => $this->buildSeoMeta([
-                'title' => $article->title.' CV. PARIWARA SATU SAE',
+        ])->withViewData(Seo::make([
+                'title' => $article->title.' | CV. PARIWARA SATU SAE',
                 'description' => $description,
-                'keywords' => [
-                    $article->title,
-                    'neon sign malang',
-                    'jawa timur',
-                ],
+                'keywords' => $article->title.', neon sign malang, jawa timur',
                 'image' => $metaImage,
                 'url' => route('artikel.show', ['slug' => $slug]),
-            ]),
-        ]);
+                'canonical' => route('artikel.show', ['slug' => $slug]),
+                'og_type' => 'article',
+            ]));
     }
 
     private function transformArticle(Article $article, bool $includeContent): array

@@ -1,7 +1,5 @@
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
-import SeoHead from '@/components/seo/seo-head';
-import type { SeoMeta } from '@/components/seo/seo-head';
 import Articles from '@/section/Articles';
 import Clients from '@/section/Clients';
 import FinalCta from '@/section/FinalCta';
@@ -67,7 +65,6 @@ interface WelcomeProps {
     products: ProductItem[];
     galleryItems: GalleryItem[];
     articleItems: ArticleItem[];
-    meta: SeoMeta;
 }
 
 export default function Welcome({
@@ -76,17 +73,9 @@ export default function Welcome({
     products,
     galleryItems,
     articleItems,
-    meta,
 }: WelcomeProps) {
     return (
         <>
-            <SeoHead meta={meta}>
-                <link rel="preconnect" href="https://fonts.bunny.net" />
-                <link
-                    href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
-                    rel="stylesheet"
-                />
-            </SeoHead>
             <Navbar transparent />
             <main>
                 <Hero />

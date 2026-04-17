@@ -4,8 +4,6 @@ import { useMemo, useState } from 'react';
 
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
-import SeoHead from '@/components/seo/seo-head';
-import type { SeoMeta } from '@/components/seo/seo-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
@@ -21,10 +19,9 @@ interface GalleryItem {
 
 interface GalleryPageProps {
     items: GalleryItem[];
-    meta: SeoMeta;
 }
 
-export default function GalleryPage({ items, meta }: GalleryPageProps) {
+export default function GalleryPage({ items }: GalleryPageProps) {
     const [activeFilter, setActiveFilter] = useState('Semua');
     const [selectedImageId, setSelectedImageId] = useState<number | null>(null);
 
@@ -50,7 +47,6 @@ export default function GalleryPage({ items, meta }: GalleryPageProps) {
 
     return (
         <>
-            <SeoHead meta={meta} />
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">
@@ -182,7 +178,7 @@ export default function GalleryPage({ items, meta }: GalleryPageProps) {
 
                             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
                                 <Button asChild size="lg">
-                                    <a href="https://wa.me/6285136816957" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://wa.me/628123394055" target="_blank" rel="noopener noreferrer">
                                         Konsultasi Gratis
                                         <ArrowRight className="h-4 w-4" />
                                     </a>

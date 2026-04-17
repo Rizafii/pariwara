@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Concerns\BuildsSeoMeta;
 use App\Http\Controllers\Concerns\InteractsWithMedia;
 use App\Http\Controllers\Controller;
 use App\Models\GalleryItem;
+use App\Support\Seo;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class GalleryController extends Controller
 {
-    use BuildsSeoMeta;
     use InteractsWithMedia;
 
     public function index(): Response
@@ -32,17 +31,13 @@ class GalleryController extends Controller
 
         return Inertia::render('gallery', [
             'items' => $items,
-            'meta' => $this->buildSeoMeta([
+        ])->withViewData(Seo::make([
                 'title' => 'Galeri Proyek Neon Sign Malang | Orion\'s Melody',
                 'description' => 'Portofolio proyek neon sign, neon box, dan signage untuk bisnis di Malang dan Jawa Timur.',
-                'keywords' => [
-                    'galeri neon sign malang',
-                    'portofolio signage malang',
-                    'branding usaha jawa timur',
-                ],
+                'keywords' => 'galeri neon sign malang, portofolio signage malang, branding usaha jawa timur',
                 'image' => $items->first()['image'] ?? null,
                 'url' => route('gallery'),
-            ]),
-        ]);
+                'canonical' => route('gallery'),
+            ]));
     }
 }

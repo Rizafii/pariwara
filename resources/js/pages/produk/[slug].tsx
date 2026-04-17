@@ -4,8 +4,6 @@ import { useState } from 'react';
 
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
-import SeoHead from '@/components/seo/seo-head';
-import type { SeoMeta } from '@/components/seo/seo-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
@@ -22,34 +20,24 @@ interface ProductItem {
     features: string[];
 }
 
-const WA_NUMBER = '6285136816957';
+const WA_NUMBER = '628123394055';
 
 function getWhatsAppUrl(message: string) {
     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
 interface ProductDetailProps {
-    meta: SeoMeta;
     product: ProductItem | null;
     otherProducts: ProductItem[];
 }
 
-export default function ProductDetail({ product, otherProducts, meta }: ProductDetailProps) {
+export default function ProductDetail({ product, otherProducts }: ProductDetailProps) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [lightboxOpen, setLightboxOpen] = useState(false);
 
     if (!product) {
         return (
             <>
-                <SeoHead
-                    meta={{
-                        title: 'Produk Tidak Ditemukan | CV. PARIWARA SATU SAE',
-                        description: 'Produk yang Anda cari tidak tersedia atau sudah dipindahkan.',
-                        keywords: 'produk neon sign malang, signage malang',
-                        image: meta.image,
-                        url: meta.url,
-                    }}
-                />
                 <Navbar />
                 <main className="flex min-h-screen items-center justify-center px-4">
                     <section className="text-center">
@@ -68,7 +56,6 @@ export default function ProductDetail({ product, otherProducts, meta }: ProductD
 
     return (
         <>
-            <SeoHead meta={meta} />
             <Navbar />
 
             <main className="bg-background pt-32 pb-16">

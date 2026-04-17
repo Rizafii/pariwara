@@ -16,6 +16,7 @@ createInertiaApp({
             case name === 'gallery':
             case name === 'artikel':
             case name === 'tentang':
+            case name === 'kontak':
             case name.startsWith('layanan/'):
             case name.startsWith('produk/'):
             case name.startsWith('artikel/'):

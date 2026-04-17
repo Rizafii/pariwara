@@ -3,8 +3,6 @@ import { ArrowRight, Check, PhoneCall, Sparkles } from 'lucide-react';
 
 import Navbar from '@/components/custom/Navbar';
 import Whatsapp from '@/components/custom/Whatsapp';
-import SeoHead from '@/components/seo/seo-head';
-import type { SeoMeta } from '@/components/seo/seo-head';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -21,19 +19,17 @@ interface ServiceItem {
 
 interface ServicesPageProps {
     services: ServiceItem[];
-    meta: SeoMeta;
 }
 
-const WA_NUMBER = '6285136816957';
+const WA_NUMBER = '628123394055';
 
 function getWhatsAppUrl(message: string) {
     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
-export default function ServicesPage({ services, meta }: ServicesPageProps) {
+export default function ServicesPage({ services }: ServicesPageProps) {
     return (
         <>
-            <SeoHead meta={meta} />
             <Navbar />
 
             <main className="bg-background pt-28 pb-16">
