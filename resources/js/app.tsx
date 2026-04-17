@@ -18,6 +18,7 @@ createInertiaApp({
             case name === 'tentang':
             case name === 'kontak':
             case name.startsWith('layanan/'):
+            case name.startsWith('landing/'):
             case name.startsWith('produk/'):
             case name.startsWith('artikel/'):
                 return MarketingLayout;

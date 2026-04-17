@@ -10,24 +10,6 @@ const FOOTER_NAV = [
     { label: 'Tentang Kami', href: '/tentang' },
 ];
 
-const FEATURED_SERVICES = [
-    {
-        label: 'Neon Sign Custom',
-        href: '/layanan/pembuatan-neon-sign',
-    },
-    {
-        label: 'Pemasangan Reklame',
-        href: '/layanan/pemasangan-reklame',
-    },
-    {
-        label: 'LED & Videotron',
-        href: '/layanan/led-videotron',
-    },
-    {
-        label: 'Letter Timbul',
-        href: '/layanan/letter-timbul-huruf-akrilik',
-    },
-];
 
 const year = new Date().getFullYear();
 
@@ -38,7 +20,7 @@ export default function SiteFooter() {
             <div className="pointer-events-none absolute right-10 bottom-0 h-64 w-64 rounded-full bg-cyan-400/10 blur-[110px]" />
 
             <div className="container relative z-10 mx-auto px-4 py-14 sm:px-6 lg:px-28">
-                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
                     <div>
                         <Link href="/" className="inline-flex items-center gap-3">
                             <img src="/logo/logo.webp" alt="Logo Pariwara" className="h-11 w-auto rounded" />
@@ -70,24 +52,6 @@ export default function SiteFooter() {
                     </div>
 
                     <div>
-                        <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-white/90">
-                            Layanan Unggulan
-                        </h3>
-                        <ul className="mt-4 space-y-2">
-                            {FEATURED_SERVICES.map((service) => (
-                                <li key={service.label}>
-                                    <Link
-                                        href={service.href}
-                                        className="text-sm text-slate-300 transition-colors hover:text-primary"
-                                    >
-                                        {service.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
                         <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-white/90">Kontak</h3>
                         <ul className="mt-4 space-y-3 text-sm text-slate-300">
                             <li className="flex items-start gap-2">
@@ -99,7 +63,7 @@ export default function SiteFooter() {
                             <li className="flex items-start gap-2">
                                 <Phone className="mt-0.5 h-4 w-4 text-primary" />
                                 <a href="tel:+628123394055" className="transition-colors hover:text-primary">
-                                    +62 851-3681-6957
+                                    +62 821-2339-4055
                                 </a>
                             </li>
                             <li className="flex items-start gap-2">

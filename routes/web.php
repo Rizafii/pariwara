@@ -10,6 +10,7 @@ use App\Http\Controllers\Website\ArticleController;
 use App\Http\Controllers\Website\AboutController;
 use App\Http\Controllers\Website\ContactController;
 use App\Http\Controllers\Website\GalleryController;
+use App\Http\Controllers\Website\GoogleAdsLandingController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\ProductController;
 use App\Http\Controllers\Website\ServiceController;
@@ -28,6 +29,7 @@ Route::get('/produk', [ProductController::class, 'index'])->name('produk.index')
 
 Route::get('/tentang', AboutController::class)->name('tentang');
 Route::get('/kontak', ContactController::class)->name('kontak');
+Route::get('/jasa-neon-sign-malang', GoogleAdsLandingController::class)->name('landing.google-ads');
 
 Route::redirect('/tentang-kami', '/tentang', 301);
 
