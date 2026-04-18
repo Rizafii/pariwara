@@ -43,7 +43,7 @@ export default function ContactPage() {
                             <ul className="mt-5 space-y-4">
                                 <li className="flex items-start gap-3 text-sm text-muted-foreground">
                                     <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                                    <span>+62 821-2339-4055</span>
+                                    <span>+62 812-3394-055</span>
                                 </li>
                                 <li className="flex items-start gap-3 text-sm text-muted-foreground">
                                     <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary" />

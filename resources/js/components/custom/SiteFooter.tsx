@@ -63,7 +63,7 @@ export default function SiteFooter() {
                             <li className="flex items-start gap-2">
                                 <Phone className="mt-0.5 h-4 w-4 text-primary" />
                                 <a href="tel:+628123394055" className="transition-colors hover:text-primary">
-                                    +62 821-2339-4055
+                                    +62 812-3394-055
                                 </a>
                             </li>
                             <li className="flex items-start gap-2">
