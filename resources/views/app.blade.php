@@ -9,6 +9,50 @@
             $seoCanonical = $canonical ?? $seoUrl;
             $seoOgType = $og_type ?? 'website';
             $seoKeywords = $keywords ?? '';
+            $seoRobots = $robots ?? '';
+            $seoLocale = str_replace('-', '_', app()->getLocale());
+            $seoLogo = asset('logo/logo.webp');
+            $seoStructuredData = [
+                '@context' => 'https://schema.org',
+                '@graph' => [
+                    [
+                        '@type' => 'Organization',
+                        '@id' => url('/').'#organization',
+                        'name' => config('app.name'),
+                        'url' => url('/'),
+                        'logo' => [
+                            '@type' => 'ImageObject',
+                            'url' => $seoLogo,
+                        ],
+                        'image' => $seoImage,
+                    ],
+                    [
+                        '@type' => 'WebSite',
+                        '@id' => url('/').'#website',
+                        'url' => url('/'),
+                        'name' => config('app.name'),
+                        'inLanguage' => $seoLocale,
+                        'publisher' => [
+                            '@id' => url('/').'#organization',
+                        ],
+                    ],
+                    [
+                        '@type' => 'WebPage',
+                        '@id' => $seoCanonical.'#webpage',
+                        'url' => $seoCanonical,
+                        'name' => $seoTitle,
+                        'description' => $seoDescription,
+                        'inLanguage' => $seoLocale,
+                        'isPartOf' => [
+                            '@id' => url('/').'#website',
+                        ],
+                        'primaryImageOfPage' => [
+                            '@type' => 'ImageObject',
+                            'url' => $seoImage,
+                        ],
+                    ],
+                ],
+            ];
         @endphp
 
         <meta charset="utf-8">
@@ -17,20 +61,29 @@
 
         <meta name="description" content="{{ $seoDescription }}">
         <meta name="keywords" content="{{ $seoKeywords }}">
+        @if ($seoRobots !== '')
+        <meta name="robots" content="{{ $seoRobots }}">
+        <meta name="googlebot" content="{{ $seoRobots }}">
+        @endif
 
         <meta property="og:title" content="{{ $seoTitle }}">
         <meta property="og:description" content="{{ $seoDescription }}">
         <meta property="og:image" content="{{ $seoImage }}">
+        <meta property="og:image:secure_url" content="{{ $seoImage }}">
+        <meta property="og:image:alt" content="{{ $seoTitle }}">
         <meta property="og:url" content="{{ $seoUrl }}">
         <meta property="og:type" content="{{ $seoOgType }}">
         <meta property="og:site_name" content="{{ config('app.name') }}">
+        <meta property="og:locale" content="{{ $seoLocale }}">
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="{{ $seoTitle }}">
         <meta name="twitter:description" content="{{ $seoDescription }}">
         <meta name="twitter:image" content="{{ $seoImage }}">
+        <meta name="twitter:image:alt" content="{{ $seoTitle }}">
 
         <link rel="canonical" href="{{ $seoCanonical }}">
+        <script type="application/ld+json">@json($seoStructuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
 
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
         <script>

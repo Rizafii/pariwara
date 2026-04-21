@@ -11,6 +11,8 @@ class Seo
 
     private const DEFAULT_IMAGE = 'logo/logo.webp';
 
+    private const DEFAULT_ROBOTS = 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
+
     /**
      * @param  array<string, mixed>  $data
      * @return array<string, string>
@@ -34,6 +36,7 @@ class Seo
             'canonical' => self::normalizeUrl($data['canonical'] ?? $url),
             'keywords' => self::sanitize((string) ($data['keywords'] ?? '')),
             'og_type' => self::sanitize((string) ($data['og_type'] ?? 'website')) ?: 'website',
+            'robots' => self::sanitize((string) ($data['robots'] ?? self::DEFAULT_ROBOTS)) ?: self::DEFAULT_ROBOTS,
         ];
     }
 

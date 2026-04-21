@@ -98,9 +98,7 @@ class HomeController extends Controller
                 'author' => $article->user?->name ?? $article->author,
             ]);
 
-        $featuredGalleryImage = $galleryItems->isNotEmpty()
-            ? ($galleryItems->random()['image'] ?? null)
-            : null;
+        $featuredGalleryImage = $galleryItems->first()['image'] ?? asset('logo/logo.webp');
 
         return Inertia::render('welcome', [
             'clients' => $clients,
@@ -109,8 +107,8 @@ class HomeController extends Controller
             'galleryItems' => $galleryItems,
             'articleItems' => $articleItems,
         ])->withViewData(Seo::make([
-                'title' => "Jasa Neon Sign Malang Custom | Orion's Melody",
-                'description' => 'Jasa pembuatan neon sign custom di Malang, berkualitas premium dan harga terjangkau.',
+                'title' => "Jasa Neon Sign Malang Custom | CV. Pariwara Satu Sae",
+                'description' => 'Jasa pembuatan neon sign custom di Malang oleh CV. Pariwara Satu Sae. Melayani neon box, huruf timbul, dan signage dengan kualitas premium, desain menarik, harga terjangkau.',
                 'keywords' => 'neon sign malang, neon box malang, signage malang, jawa timur',
                 'image' => $featuredGalleryImage,
                 'url' => route('home'),
