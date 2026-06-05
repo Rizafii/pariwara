@@ -34,7 +34,7 @@ class Seo
             'image' => self::normalizeImage($data['image'] ?? $defaultImage),
             'url' => $url,
             'canonical' => self::normalizeUrl($data['canonical'] ?? $url),
-            'keywords' => self::sanitize((string) ($data['keywords'] ?? '')),
+            'keywords' => GscKeywords::enrich(self::sanitize((string) ($data['keywords'] ?? ''))),
             'og_type' => self::sanitize((string) ($data['og_type'] ?? 'website')) ?: 'website',
             'robots' => self::sanitize((string) ($data['robots'] ?? self::DEFAULT_ROBOTS)) ?: self::DEFAULT_ROBOTS,
         ];
